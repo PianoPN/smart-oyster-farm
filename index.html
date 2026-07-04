@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ยินดีต้อนรับ - Smart Farm หอยอัจฉริยะ</title>
+    <style>
+        /* CSS การจัดหน้า */
+        body {
+            
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #cbffda; /* เปลี่ยนเป็นสีเขียวเข้ม-ดำ เพื่อให้แสงเรืองโดดเด่น */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* ป้องกันแถบสกรูลจากการขยับ */
+        }
+
+        /* ส่วนของกรอบข้อความที่เรืองแสงและลอยได้ */
+        .login-card {
+            background: rgba(255, 255, 255, 0.807); /* โปร่งแสงเล็กน้อย */
+            padding: 1.5rem;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            
+            /* -- การเรืองแสง (Neon Glow) -- */
+            border: 2px solid #22c55e; /* ขอบสีเขียวสด */
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5), /* แสงฟุ้งชั้นใน */
+                        0 0 30px rgba(34, 197, 94, 0.3), /* แสงฟุ้งชั้นนอก */
+                        inset 0 0 10px rgba(34, 197, 94, 0.2); /* แสงสะท้อนด้านใน */
+            
+            /* -- การลอยขยับขึ้นลง (Animation definition) -- */
+            animation: floatBubble 4s ease-in-out infinite; 
+            
+            /* เพื่อให้ดูพรีเมียมขึ้น */
+            backdrop-filter: blur(5px); /* เบลอหลังกรอบ (Glassmorphism) */
+        }
+
+        /* --- คีย์เฟรมสำหรับ Animation การลอย --- */
+        @keyframes floatBubble {
+            0% {
+                transform: translateY(0px); /* ตำแหน่งเริ่มต้น */
+            }
+            50% {
+                transform: translateY(-20px); /* ลอยขึ้นไป 20px */
+            }
+            100% {
+                transform: translateY(0px); /* กลับมาที่เดิม */
+            }
+        }
+
+        /* CSS การตกแต่งองค์ประกอบภายใน */
+        h1 {
+            color: #4ade80; /* สีเขียวเรืองแสงเข้ม */
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 5px rgba(74, 222, 128, 0.5); /* เรืองแสงที่ตัวอักษร */
+        }
+
+        p {
+            color: #22863d; /* สีเขียวอ่อน */
+            margin-bottom: 2.5rem;
+            opacity: 0.8;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: #4ade80;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            border-radius: 10px;
+            box-sizing: border-box;
+            outline: none;
+            color: rgb(112, 227, 92); /* ตัวอักษรที่พิมพ์เป็นสีขาว */
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: #4ade80;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #16a34a; /* สีเขียวหลัก */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            
+            /* เรืองแสงที่ปุ่ม */
+            box-shadow: 0 0 10px rgba(22, 163, 74, 0.5);
+        }
+
+        button:hover {
+            background-color: #22c55e; /* สีเขียวสว่างขึ้นเมื่อชี้ */
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.7);
+            transform: scale(1.02); /* ขยายใหญ่ขึ้นเล็กน้อย */
+        }
+
+        .switch-text {
+            margin-top: 1.8rem;
+            font-size: 0.95rem;
+            color: rgba(41, 132, 21, 0.7);
+        }
+
+        .switch-text a {
+            color: #4ade80;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .switch-text a:hover {
+            color: #22c55e;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<div class="aquarium-bg"></div>
+    <div class="light-rays"></div>
+    <div class="water-waves">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+    </div>
+    <div id="bubble-container" class="bubble-bg"></div>
+    <div id="aquarium-fish-tank" class="fish-tank"></div>
+<body>
+
+    <div class="login-card">
+        <h1 id="title">ยินดีต้อนรับ</h1>
+        <p id="subtitle">เข้าสู่ระบบฟาร์มหอยด้วยอีเมลของคุณ</p>
+
+        <div class="input-group">
+            <label for="email">อีเมล (Email)</label>
+            <input type="email" id="email" placeholder="example@email.com">
+        </div>
+
+        <div class="input-group">
+            <label for="password">รหัสผ่าน</label>
+            <input type="password" id="password" placeholder="ระบุรหัสผ่าน">
+        </div>
+
+        <button onclick="handleAuth()" id="main-btn">เข้าสู่ระบบ</button>
+
+        <div class="switch-text" id="switch-area">
+            ยังไม่มีบัญชี? <a href="#" onclick="toggleMode()">สมัครสมาชิกที่นี่</a>
+        </div>
+    </div>
+
+    <script>
+        // โค้ด JavaScript ( handleAuth, toggleMode ) ยังคงเดิมตามที่เราตกลงกันไว้
+        // (ยกเว้นส่วนการสลับค่า input เพื่อความต่อเนื่อง)
+        let isLoginMode = true;
+
+        function toggleMode() {
+            isLoginMode = !isLoginMode;
+            const title = document.getElementById('title');
+            const subtitle = document.getElementById('subtitle');
+            const mainBtn = document.getElementById('main-btn');
+            const switchArea = document.getElementById('switch-area');
+
+            // ล้างค่าในช่องกรอกทุกครั้งที่สลับโหมด
+            document.getElementById('email').value = "";
+            document.getElementById('password').value = "";
+
+            if (isLoginMode) {
+                title.innerText = "ยินดีต้อนรับ";
+                subtitle.innerText = "เข้าสู่ระบบฟาร์มหอยด้วยอีเมลของคุณ";
+                mainBtn.innerText = "เข้าสู่ระบบ";
+                switchArea.innerHTML = 'ยังไม่มีบัญชี? <a href="#" onclick="toggleMode()">สมัครสมาชิกที่นี่</a>';
+            } else {
+                title.innerText = "สมัครสมาชิก";
+                subtitle.innerText = "ลงทะเบียนด้วยอีเมลเพื่อเริ่มจัดการฟาร์ม";
+                mainBtn.innerText = "ยืนยันการสมัคร";
+                switchArea.innerHTML = 'มีบัญชีแล้วใช่ไหม? <a href="#" onclick="toggleMode()">เข้าสู่ระบบที่นี่</a>';
+            }
+        }
+
+        function handleAuth() {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+
+            if (!email || !pass) {
+                alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+                return;
+            }
+
+            if (!email.includes('@')) {
+                alert("กรุณากรอกอีเมลที่ถูกต้อง (ต้องมี @)");
+                return;
+            }
+
+            if (isLoginMode) {
+                const savedEmail = localStorage.getItem('farm_email');
+                const savedPass = localStorage.getItem('farm_pass');
+
+                if (email === savedEmail && pass === savedPass) {
+                    alert("ยินดีต้อนรับกลับครับ! กำลังเข้าสู่ระบบ...");
+                    window.location.href = "dashboard.html";
+                } else {
+                    alert("อีเมลหรือรหัสผ่านไม่ถูกต้อง");
+                }
+            } else {
+                localStorage.setItem('farm_email', email);
+                localStorage.setItem('farm_pass', pass);
+                alert("สมัครสมาชิกสำเร็จ! ข้อมูลอีเมลถูกบันทึกแล้ว");
+                toggleMode();
+            }
+        }
+    </script>
+</body>
+</html>

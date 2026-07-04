@@ -1,0 +1,580 @@
+/* รีเซ็ตค่าพื้นฐาน */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Helvetica Neue', Arial;
+}
+
+body {
+    background-color: #F5FBFF; /* พื้นหลังหลัก: ขาวอมฟ้า เพื่อความสบายตา */
+    color: #4C2E1A;            /* ตัวอักษรหลัก: น้ำตาลเข้ม คอนทราสต์ดี อ่านง่าย */
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #8B5A2B 0%, #4C2E1A 100%); /* ปรับเป็นโทนน้ำตาลเข้ม อบอุ่น เป็นธรรมชาติ */
+    color: #FFFFFF;
+    padding: 50px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* ===================================================
+   🌊 LUXURY AQUARIUM & GLASSMORPHISM CORE STYLES (guide.css)
+   =================================================== */
+
+/* 🌌 Aquarium Background Layer */
+.aquarium-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #021526 0%, #032541 40%, #074173 100%);
+    z-index: -4;
+}
+
+/* ☀️ Sun Light Rays Effect */
+.light-rays {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(14, 165, 233, 0.25) 0%, transparent 60%);
+    z-index: -3;
+    pointer-events: none;
+}
+
+/* 🌊 Water Waves Top Overlay */
+.water-waves {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 180px;
+    z-index: -2; opacity: 0.4; pointer-events: none;
+    overflow: hidden;
+}
+.wave {
+    position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 70%);
+    border-radius: 43%;
+}
+.wave1 { animation: waveMove 12s infinite linear; }
+.wave2 { animation: waveMove 18s infinite linear; opacity: 0.5; top: 10px; }
+
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 🫧 Bubble System Engine Container */
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bubble-node {
+    position: absolute; bottom: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(14, 165, 233, 0.1) 60%, rgba(255, 255, 255, 0.6) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 8px rgba(255,255,255,0.5), 0 0 12px rgba(14, 165, 233, 0.3);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+}
+
+/* 🐟 Floating Fish Simulation Container */
+.fish-tank {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; overflow: hidden;
+}
+.fish-node {
+    position: absolute; width: 25px; height: 12px;
+    background: linear-gradient(90deg, rgba(14, 165, 233, 0.4), rgba(56, 189, 248, 0.1));
+    border-radius: 50% 80% 50% 50%;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+    animation: swimRight linear infinite;
+}
+.fish-node::after {
+    content: ''; position: absolute; right: -6px; top: 2px;
+    border-left: 8px solid rgba(14, 165, 233, 0.4);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+
+@keyframes swimRight {
+    0% { left: -40px; transform: scaleY(1); }
+    50% { transform: scaleY(0.9) translateY(15px); }
+    100% { left: 105vw; transform: scaleY(1); }
+}
+
+/* 🎛️ Layout Workspace Container */
+.guide-container {
+    width: 92%; max-width: 1400px;
+    margin: 40px auto; padding-bottom: 60px;
+}
+.guide-header-title {
+    text-align: center; color: #ffffff;
+    font-size: 2.3rem; font-weight: 700;
+    text-shadow: 0 0 15px rgba(14, 165, 233, 0.6);
+    margin-bottom: 8px;
+}
+.guide-subtitle {
+    text-align: center; color: #94a3b8;
+    font-size: 1.1rem; margin-bottom: 45px;
+}
+
+/* 🛠️ Enterprise Multi-Column Grid (3 Columns) */
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* 💎 Premium Glassmorphism & Cyber Ocean Shadow Card */
+.guide-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 
+                inset 0 0 12px rgba(255, 255, 255, 0.02);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+/* 🌊 Ripple Hover & Glow Effect */
+.guide-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 15px 35px rgba(3, 105, 161, 0.5), 
+                0 0 20px rgba(56, 189, 248, 0.25),
+                inset 0 0 15px rgba(56, 189, 248, 0.1);
+}
+
+/* Card Interactive Header Header */
+.card-header {
+    padding: 24px; display: flex;
+    align-items: center; gap: 15px;
+    cursor: pointer; user-select: none;
+}
+.card-icon {
+    font-size: 1.5rem; background: rgba(14, 165, 233, 0.15);
+    padding: 10px; border-radius: 14px;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.2);
+    transition: transform 0.3s ease;
+}
+.guide-card:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+.card-title {
+    font-size: 1.1rem; font-weight: 600;
+    color: #f8fafc; margin: 0; flex-grow: 1;
+}
+.arrow-icon {
+    color: #94a3b8; font-size: 1rem;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 📐 Smooth Slide Content Transition Engine */
+.card-content-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-content {
+    overflow: hidden;
+}
+.card-content p {
+    margin: 0 24px 24px 24px; padding-top: 16px;
+    border-top: 1px dashed rgba(255,255,255,0.1);
+    color: #e2e8f0; font-size: 0.98rem; line-height: 1.6;
+}
+
+/* Active Open Card States */
+.guide-card.active {
+    background: rgba(15, 23, 42, 0.4);
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.2);
+}
+.guide-card.active .card-content-wrapper {
+    grid-template-rows: 1fr;
+}
+.guide-card.active .arrow-icon {
+    transform: rotate(180deg);
+    color: #38bdf8;
+}
+.guide-card.active .card-title {
+    color: #38bdf8;
+}
+
+/* 📱 Responsive Engineering Matrix */
+@media (max-width: 1150px) {
+    .guide-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .guide-header-title { font-size: 2rem; }
+}
+@media (max-width: 720px) {
+    .guide-grid { grid-template-columns: 1fr; gap: 15px; }
+    .guide-header-title { font-size: 1.7rem; }
+    .guide-container { margin: 20px auto; }
+}
+/* ===================================================
+   🌊 GLOBAL AQUARIUM LAYER STYLES
+   =================================================== */
+.aquarium-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 40%, #7dd3fc 100%);
+    z-index: -4;
+}
+.light-rays {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.7) 0%, transparent 60%);
+    z-index: -3;
+    pointer-events: none;
+}
+.water-waves {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 180px;
+    z-index: -2; opacity: 0.6; pointer-events: none;
+    overflow: hidden;
+}
+.wave {
+    position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 70%);
+    border-radius: 43%;
+}
+.wave1 { animation: waveMove 12s infinite linear; }
+.wave2 { animation: waveMove 18s infinite linear; opacity: 0.5; top: 10px; }
+
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bubble-node {
+    position: absolute; bottom: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(56, 189, 248, 0.2) 60%, rgba(255, 255, 255, 0.8) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.6), 0 0 10px rgba(14, 165, 233, 0.2);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+}
+
+.fish-tank {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; overflow: hidden;
+}
+.fish-node {
+    position: absolute; width: 25px; height: 12px;
+    background: linear-gradient(90deg, rgba(2, 132, 199, 0.5), rgba(56, 189, 248, 0.2));
+    border-radius: 50% 80% 50% 50%;
+    box-shadow: 0 0 8px rgba(14, 165, 233, 0.3);
+    animation: swimRight linear infinite;
+}
+.fish-node::after {
+    content: ''; position: absolute; right: -6px; top: 2px;
+    border-left: 8px solid rgba(2, 132, 199, 0.5);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+
+@keyframes swimRight {
+    0% { left: -40px; transform: scaleY(1); }
+    50% { transform: scaleY(0.9) translateY(15px); }
+    100% { left: 105vw; transform: scaleY(1); }
+}
+
+/* Navigation Tabs */
+nav {
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #E6F2FA; /* เส้นขอบฟ้าอ่อนมาก คุมโทน กลมกลืน */
+}
+
+.nav-tabs {
+    display: flex;
+    justify-content: center;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 18px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #7A5C49; /* ตัวอักษรรอง: น้ำตาลอ่อน นุ่มนวล ไม่แย่งสายตา */
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-btn:hover {
+    color: #8B5A2B; /* สีหลักหัวข้อ */
+    background-color: #E6F2FA; /* สีฟ้าอ่อนมาก */
+}
+
+.tab-btn.active {
+    color: #8B5A2B; /* สีหลักหัวข้อ */
+    border-bottom: 3px solid #8B5A2B;
+    background-color: #FFFFFF;
+}
+
+/* Main Content & Section Transitions */
+main {
+    padding: 40px 0;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    color: #8B5A2B; /* สีหลักหัวข้อ: น้ำตาลเข้ม */
+    margin-bottom: 15px;
+    border-left: 5px solid #87CEEB; /* สีรอง: ฟ้าอ่อน สื่อถึงความสดชื่น น้ำ */
+    padding-left: 12px;
+}
+
+.intro-text {
+    margin-bottom: 30px;
+    color: #7A5C49; /* ตัวอักษรรอง: น้ำตาลอ่อน */
+    font-size: 1.1rem;
+}
+
+/* Tab 1: Grid Cards */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #FFFFFF; /* พื้นหลังการ์ด: ขาว ดูสะอาด โปร่ง */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(139, 90, 43, 0.05); /* เงาสีน้ำตาลจางๆ */
+    border: 1px solid #E6F2FA; /* เส้นขอบฟ้าอ่อนมาก */
+    border-top: 4px solid #8B5A2B; /* ด้านบนเน้นสีหลักน้ำตาลเข้ม */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(139, 90, 43, 0.1);
+}
+
+.card h3 {
+    color: #8B5A2B;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+
+.card p {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #4C2E1A;
+}
+
+.card strong {
+    color: #8B5A2B;
+}
+
+/* Tab 2: Lifecycle Image & Timeline */
+.image-container {
+    text-align: center;
+    margin-bottom: 40px;
+    background-color: #FFFFFF;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #E6F2FA;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.lifecycle-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #87CEEB; /* เส้นแกนไทม์ไลน์สีฟ้าอ่อน */
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 35px;
+    padding-left: 50px;
+}
+
+.timeline-badge {
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    width: 28px;
+    height: 28px;
+    background: #8B5A2B; /* สีหลักน้ำตาลเข้ม */
+    color: #FFFFFF;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 0 0 4px #E6F2FA; /* วงแหวนฟ้าอ่อนมากครอบบัจก์ */
+}
+
+.timeline-panel {
+    background: #FFFFFF; /* ขาวดูสะอาดโปร่ง */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid #E6F2FA;
+}
+
+.timeline-panel h3 {
+    color: #8B5A2B;
+    margin-bottom: 10px;
+}
+
+/* Tab 3: Nutrition styles */
+.nutrition-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.nutrition-box {
+    background: #FFFFFF;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid #E6F2FA;
+}
+
+.nutrition-box h3 {
+    color: #8B5A2B;
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+}
+
+.nutrition-box ul {
+    list-style-type: none;
+}
+
+.nutrition-box li {
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 25px;
+    color: #4C2E1A;
+}
+
+.nutrition-box li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #87CEEB; /* ไอคอนสีฟ้าอ่อน สื่อถึงความสดชื่น */
+    font-weight: bold;
+}
+
+/* ปุ่มสีเน้น (Highlight Button) สไตล์พีช/ส้มอ่อน */
+.btn-highlight {
+    background-color: #FFBFAB; /* สีเน้น: พีช/ส้มอ่อน อ่อนโยน น่าใช้ */
+    color: #4C2E1A;            /* ตัวอักษรน้ำตาลเข้มเพื่อให้อ่านง่าย */
+    border: none;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 191, 171, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-highlight:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(255, 191, 171, 0.6);
+    background-color: #ffa891; /* เข้มขึ้นเล็กน้อยเมื่อ Hover */
+}
+
+/* Footer */
+footer {
+    background-color: #4C2E1A; /* ปรับให้เข้ากับธีมน้ำตาลเข้ม */
+    color: #E6F2FA;
+    text-align: center;
+    padding: 25px 0;
+    font-size: 0.9rem;
+    margin-top: 50px;
+}
+
+/* Responsive Design สำหรับมือถือ */
+@media (max-width: 600px) {
+    .nav-tabs {
+        flex-direction: column;
+    }
+    .tab-btn {
+        text-align: center;
+        border-bottom: none;
+        border-left: 3px solid transparent;
+        padding: 12px;
+    }
+    .tab-btn.active {
+        border-bottom: none;
+        border-left: 3px solid #8B5A2B;
+        background-color: #E6F2FA;
+    }
+}

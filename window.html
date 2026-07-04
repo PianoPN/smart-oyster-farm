@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>การตั้งค่าโปรไฟล์ - Smart Farm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="aquarium-bg"></div>
+    <div class="light-rays"></div>
+    <div class="water-waves">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+    </div>
+    <div id="bubble-container" class="bubble-bg"></div>
+    <div id="aquarium-fish-tank" class="fish-tank"></div>
+    <link rel="stylesheet" href="win.css">
+
+<body class="window-page">
+  <nav>
+        <div class="navbar-inner">
+            <a href="dashboard.html" class="home-btn">
+                <i class="fa-solid fa-house"></i> กลับหน้า Dashboard
+            </a>
+        </div>
+    </nav>
+    <h1>การตั้งค่าโปรไฟล์</h1>
+
+   <div class="profile-card">
+    <label>อีเมล:</label>
+    <input type="email" id="edit-email" disabled>
+
+    <label>ชื่อ-นามสกุล:</label>
+    <input type="text" id="edit-fullname" disabled>
+
+    <label>ชื่อฟาร์ม:</label>
+    <input type="text" id="edit-farmname" disabled>
+
+    <button id="main-btn" onclick="handleButtonClick()" class="save-btn">แก้ไขข้อมูล</button>
+</div>
+</body>
+
+    <script>
+       let isEditing = false; // สถานะปัจจุบัน: false = ดูอย่างเดียว, true = แก้ไขได้
+
+function handleButtonClick() {
+    const btn = document.getElementById('main-btn');
+    const inputs = [
+        document.getElementById('edit-email'),
+        document.getElementById('edit-fullname'),
+        document.getElementById('edit-farmname')
+    ];
+
+    if (!isEditing) {
+        // --- เข้าสู่โหมด "แก้ไข" ---
+        isEditing = true;
+        btn.innerText = "บันทึกข้อมูล"; // เปลี่ยนข้อความปุ่ม
+        btn.style.backgroundColor = "#2563eb"; // เปลี่ยนสีเป็นสีน้ำเงิน (เลือกได้ตามใจชอบ)
+        
+        // ปลดล็อคทุกช่อง
+        inputs.forEach(input => input.disabled = false);
+        inputs[0].focus(); // ให้เคอร์เซอร์ไปกระพริบที่ช่องแรกทันที
+    } else {
+        // --- เข้าสู่โหมด "บันทึก" ---
+        saveData(); // เรียกฟังก์ชันเซฟข้อมูลลงเครื่อง
+        
+        isEditing = false;
+        btn.innerText = "แก้ไขข้อมูล"; // เปลี่ยนข้อความกลับ
+        btn.style.backgroundColor = "#16a34a"; // เปลี่ยนสีกลับเป็นสีเขียว
+        
+        // ล็อคทุกช่องกลับเหมือนเดิม
+        inputs.forEach(input => input.disabled = true);
+    }
+}
+
+function saveData() {
+    const email = document.getElementById('edit-email').value;
+    const fullname = document.getElementById('edit-fullname').value;
+    const farmname = document.getElementById('edit-farmname').value;
+
+    // บันทึกข้อมูลลงเครื่อง
+    localStorage.setItem('farm_email', email);
+    localStorage.setItem('user_fullname', fullname);
+    localStorage.setItem('farm_name', farmname);
+    
+    // --- จุดที่เปลี่ยน: ลบ alert("บันทึกข้อมูลเรียบร้อยแล้ว!") ออก ---
+    
+    // สร้างสถานะแจ้งเตือนบนปุ่ม หรือแสดงข้อความสั้นๆ แทน
+    const btn = document.getElementById('main-btn');
+    const originalText = "แก้ไขข้อมูล"; 
+    
+    // เปลี่ยนข้อความที่ปุ่มชั่วคราวเพื่อบอกว่า "บันทึกแล้วนะ"
+    btn.innerText = "บันทึกสำเร็จ! ✅";
+    btn.style.backgroundColor = "#059669"; // สีเขียวเข้มขึ้นนิดนึง
+    
+    // รอ 2 วินาทีแล้วเปลี่ยนข้อความกลับเป็นปกติ
+    setTimeout(() => {
+        btn.innerText = originalText;
+        btn.style.backgroundColor = "#16a34a"; // สีเขียวปกติ
+    }, 2000);
+}
+// ดึงข้อมูลมาโชว์ตอนโหลดหน้า (เหมือนเดิม)
+window.onload = function() {
+    document.getElementById('edit-email').value = localStorage.getItem('farm_email') || "";
+    document.getElementById('edit-fullname').value = localStorage.getItem('user_fullname') || "";
+    document.getElementById('edit-farmname').value = localStorage.getItem('farm_name') || "";
+};
+    </script>
+</body>
+</html>

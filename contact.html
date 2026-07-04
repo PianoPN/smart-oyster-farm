@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้อมูลและติดต่อหน่วยงานสนับสนุน - Smart Farm</title>
+    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+   <div class="aquarium-bg"></div>
+    <div class="light-rays"></div>
+    <div class="water-waves">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+    </div>
+    <div id="bubble-container" class="bubble-bg"></div>
+    <div id="aquarium-fish-tank" class="fish-tank"></div>
+<nav>
+    <div class="navbar-inner">
+        <a href="dashboard.html" class="home-btn">
+            <i class="fas fa-home"></i> กลับหน้าหลัก
+        </a>
+        
+        <div class="nav-menu">
+            </div>
+    </div>
+</nav>
+    <div class="app-container">
+        
+        <header class="welcome-card">
+            <div class="welcome-text">ยินดีต้อนรับ คุณ janyaporn</div>
+            <div class="location-badge">
+                <i class="fa-solid fa-location-dot"></i> บ้านนาสาร 26°C
+            </div>
+            <h1 class="page-title">กรมต่างๆ</h1>
+            <p class="page-desc">คลิกที่กล่องหน่วยงานเพื่อดูรายละเอียดหน้าที่ บทบาทต่อฟาร์ม และช่องทางการติดต่อ</p>
+        </header>
+
+        <div class="agencies-feed">
+
+            <div class="agency-card-item" data-category="fishery">
+                <div class="card-trigger" onclick="toggleCard(this)">
+                    <div class="trigger-left">
+                        <div class="icon-box"><i class="fa-solid fa-fish"></i></div>
+                        <div class="title-group">
+                            <h3>1. กรมประมง (DOF)</h3>
+                            <span class="tag-sub">Department of Fisheries</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down arrow-toggle"></i>
+                </div>
+                <div class="card-expandable-content">
+                    <div class="inner-padding">
+                        <div class="info-segment">
+                            <span class="segment-title"><i class="fa-solid fa-circle-info"></i> หน้าที่ความรับผิดชอบ:</span>
+                            <p>หน่วยงานหลักที่ดูแลเรื่องการเพาะเลี้ยงสัตว์น้ำ พันธุ์พืช พันธุ์สัตว์น้ำ และกฎหมายการทำประมงชายฝั่งทั้งหมด</p>
+                        </div>
+                        <div class="info-segment">
+                            <span class="segment-title"><i class="fa-solid fa-star"></i> บทบาทต่อฟาร์มหอยนางรม:</span>
+                            <p>ให้คำปรึกษาด้านการขออนุญาตใช้พื้นที่เลี้ยงหอย, การจัดหาลูกหอยนางรมสายพันธุ์ดี, วิธีการเลี้ยง, และการวินิจฉัยโรคหอยนางรม รวมถึงการตรวจสอบสุขอนามัยเพื่อการส่งออก</p>
+                        </div>
+                        <div class="meta-info-block">
+                            <div class="meta-row"><i class="fa-solid fa-map-location-dot"></i> <span><strong>ที่อยู่ (ส่วนกลาง):</strong> เกษตรกลาง จตุจักร กรุงเทพฯ 10900</span></div>
+                            <div class="meta-row"><i class="fa-solid fa-phone"></i> <span><strong>เบอร์โทรศัพท์:</strong> 0-2562-0600 ถึง 15</span></div>
+                            <div class="meta-row"><i class="fa-solid fa-globe"></i> <span><strong>เว็บไซต์หลัก:</strong> <a href="http://www.fisheries.go.th" target="_blank">www.fisheries.go.th</a></span></div>
+                        </div>
+                        <div class="nested-highlight-box">
+                            <h4><i class="fa-solid fa-building-flag"></i> หน่วยงานเฉพาะทางที่แนะนำเพิ่มเติม:</h4>
+                            <div class="nested-row"><i class="fa-solid fa-circle-dot"></i> <span>กองวิจัยและพัฒนาการเพาะเลี้ยงสัตว์น้ำชายฝั่ง (โทร: 0-2579-2421)</span></div>
+                            <div class="nested-row highlight-alert"><i class="fa-solid fa-triangle-exclamation"></i> <span>ศูนย์วิจัยและพัฒนาการเพาะเลี้ยงสัตว์น้ำชายฝั่งสุราษฎร์ธานี (โทร: 0-7738-1959) <span class="mini-pill">สำคัญมาก แหล่งเลี้ยงใหญ่ที่สุด</span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="agency-card-item" data-category="environment">
+                <div class="card-trigger" onclick="toggleCard(this)">
+                    <div class="trigger-left">
+                        <div class="icon-box"><i class="fa-solid fa-water"></i></div>
+                        <div class="title-group">
+                            <h3>2. กรมทรัพยากรทางทะเลและชายฝั่ง (DMCR)</h3>
+                            <span class="tag-sub">Department of Marine and Coastal Resources</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down arrow-toggle"></i>
+                </div>
+                <div class="card-expandable-content">
+                    <div class="inner-padding">
+                        <div class="info-segment">
+                            <span class="segment-title"><i class="fa-solid fa-circle-info"></i> หน้าที่ความรับผิดชอบ:</span>
+                            <p>หน่วยงานที่ดูแลระบบนิเวศทางทะเล ป่าชายเลน และคุณภาพสิ่งแวดล้อมชายฝั่ง</p>
+                        </div>
+                        <div class="info-segment">
+                            <span class="segment-title"><i class="fa-solid fa-star"></i> บทบาทต่อฟาร์มหอยนางรม:</span>
+                            <p>ติดตามและเฝ้าระวังคุณภาพน้ำทะเล, แจ้งเตือนภัยและรับแจ้งเหตุการณ์น้ำเปลี่ยนสี (Plankton Bloom / Red Tide / ขี้ปลาวาฬ) ซึ่งเป็นสาเหตุสำคัญที่ทำให้หอยนางรมตายยกกระชัง หรือการเกิดปัญหามลพิษ คราบน้ำมันในทะเล</p>
+                        </div>
+                        <div class="meta-info-block">
+                            <div class="meta-row"><i class="fa-solid fa-map-location-dot"></i> <span><strong>ที่อยู่ (ส่วนกลาง):</strong> ศูนย์ราชการเฉลิมพระเกียรติฯ อาคารรัฐประศาสนภักดี (อาคาร B) ถ.แจ้งวัฒนะ หลักสี่ กรุงเทพฯ 10210</span></div>
+                            <div class="meta-row hotline-row"><i class="fa-solid fa-headset"></i> <span><strong>สายด่วนแจ้งเหตุภัยพิบัติ:</strong> <strong class="phone-highlight">1362</strong> (โทรฟรีตลอด 24 ชั่วโมง)</span></div>
+                            <div class="meta-row"><i class="fa-solid fa-phone"></i> <span><strong>เบอร์โทรศัพท์ (ส่วนกลาง):</strong> 0-2141-1300</span></div>
+                            <div class="meta-row"><i class="fa-solid fa-globe"></i> <span><strong>เว็บไซต์หลัก:</strong> <a href="http://www.dmcr.go.th" target="_blank">www.dmcr.go.th</a></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="agency-card-item" data-category="tech">
+                <div class="card-trigger" onclick="toggleCard(this)">
+                    <div class="trigger-left">
+                        <div class="icon-box"><i class="fa-solid fa-microchip"></i></div>
+                        <div class="title-group">
+                            <h3>3. สำนักงานส่งเสริมเศรษฐกิจดิจิทัล (depa)</h3>
+                            <span class="tag-sub">Digital Economy Promotion Agency</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down arrow-toggle"></i>
+                </div>
+                <div class="card-expandable-content">
+                    <div class="inner-padding">
+                        <div class="info-segment">
+                            <span class="segment-title"><i class="fa-solid fa-circle-info"></i> หน้าที่ความรับผิดชอบ:</span>
+                            <p>หน่วยงานภาครัฐที่มีหน้าที่ส่งเสริมและสนับสนุนให้เกิดการประยุกต์ใช้เทคโนโลยีดิจิทัลในภาคการเกษตร</p>
+                        </div>
+                        <div class="info-segment">
+                            <span class="segment-title"><i class="fa-solid fa-star"></i> บทบาทต่อฟาร์มหอยนางรม:</span>
+                            <p>มีทุนสนับสนุนและโครงการช่วยเหลือเกษตรกร เช่น <span class="text-highlight">"depa mini Transformation Voucher"</span> (คูปองดิจิทัลเพื่อการประยุกต์ใช้เทคโนโลยี) ซึ่งเกษตรกรสามารถขอทุนเพื่อนำระบบเซนเซอร์ IoT, ระบบสมาร์ทฟาร์ม หรือบอร์ดควบคุมอัจฉริยะไปติดตั้งในฟาร์มหอยเพื่อลดต้นทุนและเพิ่มผลผลิต</p>
+                        </div>
+                        <div class="meta-info-block">
+                            <div class="meta-row"><i class="fa-solid fa-map-location-dot"></i> <span><strong>ที่อยู่ (ส่วนกลาง):</strong> อาคารลาดพร้าวฮิลล์ ซอยลาดพร้าว 4 ถนนลาดพร้าว แขวงจอมพล เขตจตุจักร กรุงเทพฯ 10900</span></div>
+                            <div class="meta-row"><i class="fa-solid fa-phone"></i> <span><strong>เบอร์โทรศัพท์:</strong> 0-2026-2333</span></div>
+                            <div class="meta-row"><i class="fa-solid fa-envelope"></i> <span><strong>อีเมลติดต่อ:</strong> info@depa.or.th (หรือติดต่อฝ่ายส่งเสริมการประยุกต์ใช้ดิจิทัล)</span></div>
+                            <div class="meta-row"><i class="fa-solid fa-globe"></i> <span><strong>เว็บไซต์หลัก:</strong> <a href="http://www.depa.or.th" target="_blank">www.depa.or.th</a></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="agency-card-item" data-category="weather">
+                <div class="card-trigger" onclick="toggleCard(this)">
+                    <div class="trigger-left">
+                        <div class="icon-box"><i class="fa-solid fa-cloud-sun-rain"></i></div>
+                        <div class="title-group">
+                            <h3>4. กรมอุตุนิยมวิทยา (TMD)</h3>
+                            <span class="tag-sub">Thai Meteorological Department</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down arrow-toggle"></i>
+                </div>
+                <div class="card-expandable-content">
+                    <div class="inner-padding">
+                        <div class="info-segment">
+                            <span class="segment-title"><i class="fa-solid fa-circle-info"></i> หน้าที่ความรับผิดชอบ:</span>
+                            <p>หน่วยงานตรวจวัดและพยากรณ์อากาศ สภาพภูมิอากาศ และคลื่นลมในทะเล</p>
+                        </div>
+                        <div class="info-segment">
+                            <span class="segment-title"><i class="fa-solid fa-star"></i> บทบาทต่อฟาร์มหอยนางรม:</span>
+                            <p>ตรวจสอบและติดตามพยากรณ์อากาศ คลื่นลมมรสุม พายุ และปริมาณน้ำฝน เนื่องจากฟาร์มหอยนางรมอยู่กลางทะเล หากมีมรสุมหรือฝนตกหนัก น้ำจืดจะไหลลงทะเลปริมาณมากทำให้ความเค็มลดลงกะทันหัน (น้ำเบียด) เกษตรกรต้องใช้ข้อมูลนี้ในการเตรียมพร้อมรับมือหรือเลื่อนเวลาเก็บเกี่ยว</p>
+                        </div>
+                        <div class="meta-info-block">
+                            <div class="meta-row"><i class="fa-solid fa-map-location-dot"></i> <span><strong>ที่อยู่ (ส่วนกลาง):</strong> 4353 ถนนสุขุมวิท บางนา กรุงเทพฯ 10260</span></div>
+                            <div class="meta-row hotline-row"><i class="fa-solid fa-phone-volume"></i> <span><strong>สายด่วนพยากรณ์อากาศ:</strong> <strong class="phone-highlight">1182</strong></span></div>
+                            <div class="meta-row"><i class="fa-solid fa-phone"></i> <span><strong>เบอร์โทรศัพท์ (ส่วนกลาง):</strong> 0-2399-4012 ถึง 14</span></div>
+                            <div class="meta-row nav-direct-link"><i class="fa-solid fa-anchor"></i> <span><strong>ลิงก์ตรงเฉพาะทาง:</strong> <a href="https://www.tmd.go.th" target="_blank">พยากรณ์อากาศเพื่อการเดินเรือ/ชายฝั่ง <i class="fa-solid fa-arrow-up-right-from-square"></i></a></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="agency-card-item" data-category="innovation">
+                <div class="card-trigger" onclick="toggleCard(this)">
+                    <div class="trigger-left">
+                        <div class="icon-box"><i class="fa-solid fa-lightbulb"></i></div>
+                        <div class="title-group">
+                            <h3>5. สำนักงานนวัตกรรมแห่งชาติ (NIA)</h3>
+                            <span class="tag-sub">National Innovation Agency</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down arrow-toggle"></i>
+                </div>
+                <div class="card-expandable-content">
+                    <div class="inner-padding">
+                        <div class="info-segment">
+                            <span class="segment-title"><i class="fa-solid fa-circle-info"></i> หน้าที่ความรับผิดชอบ:</span>
+                            <p>หน่วยงานสนับสนุนด้านเงินทุนและการพัฒนาผู้ประกอบการที่ใช้นวัตกรรม</p>
+                        </div>
+                        <div class="info-segment">
+                            <span class="segment-title"><i class="fa-solid fa-star"></i> บทบาทต่อฟาร์มหอยนางรม:</span>
+                            <p>หากคุณหรือเกษตรกรต้องการพัฒนา "ระบบฟาร์มหอยอัจฉริยะ" ขึ้นมาเป็นผลิตภัณฑ์เพื่อขายหรือใช้งานในสเกลใหญ่ NIA มีทุนสนับสนุนโครงการนวัตกรรม (เช่น ทุนนวัตกรรมแบบเปิด - Open Innovation) สำหรับผู้พัฒนาซอฟต์แวร์และฮาร์ดแวร์ด้านการเกษตร (AgriTech)</p>
+                        </div>
+                        <div class="meta-info-block">
+                            <div class="meta-row"><i class="fa-solid fa-map-location-dot"></i> <span><strong>ที่อยู่ (ส่วนกลาง):</strong> 73/1 ถนนพระรามที่ 6 แขวงทุ่งพญาไท เขตราชเทวี กรุงเทพฯ 10400</span></div>
+                            <div class="meta-row"><i class="fa-solid fa-phone"></i> <span><strong>เบอร์โทรศัพท์:</strong> 0-2017-5555</span></div>
+                            <div class="meta-row"><i class="fa-solid fa-envelope"></i> <span><strong>อีเมลติดต่อ:</strong> info@nia.or.th</span></div>
+                            <div class="meta-row"><i class="fa-solid fa-globe"></i> <span><strong>เว็บไซต์หลัก:</strong> <a href="http://www.nia.or.th" target="_blank">www.nia.or.th</a></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="admin-footer-area">
+            <button class="capsule-admin-btn" onclick="openAdminContact()">
+                <i class="fa-regular fa-comments"></i> ช่องสำหรับสอบถามแอดมินเว็บ
+            </button>
+        </div>
+
+       
+
+    </div>
+
+    <script src="contact.js"></script>
+</body>
+</html>

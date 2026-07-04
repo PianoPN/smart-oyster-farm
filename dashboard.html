@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart Farm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="aquarium-bg"></div>
+    <div class="light-rays"></div>
+    <div class="water-waves">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+    </div>
+    <div id="bubble-container" class="bubble-bg"></div>
+    <div id="aquarium-fish-tank" class="fish-tank"></div>
+    <nav>
+        <div class="navbar-inner">
+            <div class="nav-right">
+                <div class="nav-item" onclick="toggleNotify()">
+                    <span class="bell-icon"><i class="fa-regular fa-bell"></i></span>
+                    <span class="notify-badge" id="notify-count">1</span>
+                </div>
+                <div class="nav-item" onclick="toggleProfile()">
+                    <span class="home-icon"><i class="fa-solid fa-user"></i></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <h1 id="welcome-text">ยินดีต้อนรับ คุณ -</h1>
+
+    <div class="page-layout">
+        <div class="main-content">
+            <div class="weather-bar">
+                <div class="weather-row row-top">
+                    <span id="weather-city">📍 กำลังค้นหาตำแหน่ง...</span>
+                    <span id="weather-temp">--°C</span>
+                </div>
+                <div class="weather-row row-bottom">
+                    <img id="weather-icon" src="" alt="Weather Icon" style="display:none;">
+                    <span id="weather-forecast-text">
+                        <span id="weather-desc">กำลังโหลดข้อมูลสภาพอากาศ...</span> 
+                        <span id="weather-advice"></span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="sensor-mega-card">
+                <div class="sensor-column">
+                    <img src="thermometer.png" class="sensor-icon-small" alt="Temperature">
+                    <div id="card-temp-value" class="sensor-value">--</div>
+                    <div class="sensor-title">อุณหภูมิ</div>
+                    <div id="card-temp-status" class="sensor-status status-normal">Connecting...</div>
+                </div>
+                <div class="sensor-divider"></div> 
+                <div class="sensor-column">
+                    <img src="ph-balance.png" class="sensor-icon-small" alt="pH">
+                    <div id="card-ph-value" class="sensor-value">--</div>
+                    <div class="sensor-title">ค่า pH ในน้ำ</div>
+                    <div id="card-ph-status" class="sensor-status status-normal">Connecting...</div>
+                </div>
+                <div class="sensor-divider"></div>
+                <div class="sensor-column">
+                    <img src="salt.png" class="sensor-icon-small" alt="Salinity">
+                    <div id="salinity-title" class="sensor-value">--</div>
+                    <div class="sensor-title">ค่าความเค็ม</div>
+                    <div id="status-soil" class="sensor-status status-normal">Connecting...</div>
+                </div>
+            </div>
+
+            <div class="function-group-grid">
+                <div class="menu-card" onclick="location.href='info.html'">
+                    <img src="chart-bars.png" class="sensor-icon" alt="History Data">
+                    <div class="menu-label">ข้อมูลย้อนหลัง</div>
+                </div>
+                <div class="menu-card" onclick="location.href='information.html'">
+                    <img src="text-lines.png" class="sensor-icon" alt="Information">
+                    <div class="menu-label">ศูนย์ข้อมูลและข่าวสาร</div>
+                </div>
+                <div class="menu-card" onclick="location.href='contact.html'">
+                    <img src="customer-service.png" class="sensor-icon" alt="Contact">
+                    <div class="menu-label">ติดต่อเรา</div>
+                </div>
+                <div class="menu-card" onclick="location.href='work.html'">
+                    <img src="calendar.png" class="sensor-icon" alt="Harvest Calendar">
+                    <div class="menu-label">ปฏิทินการเก็บเกี่ยว</div>
+                </div>
+                <div class="menu-card" onclick="location.href='learn.html'">
+                    <img src="search.png" class="sensor-icon" alt="Knowledge Base">
+                    <div class="menu-label">คลังความรู้</div>
+                </div>
+                <div class="menu-card" onclick="location.href='guide.html'">
+                    <img src="book.png" class="sensor-icon" alt="Guide Video">
+                    <div class="menu-label">คู่มือการเลี้ยงดู</div>
+                </div>
+                <div class="menu-card" onclick="location.href='diary.html'">
+                    <img src="text-lines.png" class="sensor-icon" alt="Diary">
+                    <div class="menu-label">บันทึกประจำวัน</div>
+                </div>
+                <div class="menu-card" onclick="location.href='pet.html'">
+                    <img src="oyster.png" class="sensor-icon" alt="AI Pet">
+                    <div class="menu-label">สัตว์เลี้ยง AI</div>
+                </div>
+            </div>
+        </div>
+
+       <aside class="side-panel">
+    <div class="water-quality-box">
+        <div class="water-quality-header">
+            <i class="fa-solid fa-droplet"></i> คุณภาพน้ำโดยรวม
+        </div>
+        <div class="water-quality-content">
+            <span id="water-status-icon" class="status-icon-emoji">😐</span>
+            <div id="water-status-text" class="status-text-lbl" style="color: #9ca3af;">กำลังคำนวณ...</div>
+            <p id="water-status-advice" class="status-advice-lbl">ระบบกำลังวิเคราะห์ค่าน้ำจากเซนเซอร์จริงสักครู่ครับ...</p>
+        </div>
+    </div>
+    <div class="water-quality-box air-pet-mini-box">
+    <div class="water-quality-header">
+        <i class="fa-solid fa-ghost"></i> AI Pet 
+    </div>
+    <div class="water-quality-content pet-avatar-display-set" id="pet-avatar-dashboard-group">
+        <svg class="oyster-svg-mini" viewBox="0 0 450 380" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="shellTopGradMini" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#bae6fd"/>
+                    <stop offset="100%" stop-color="#38bdf8"/>
+                </linearGradient>
+                <linearGradient id="shellBottomGradMini" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#0284c7"/>
+                    <stop offset="100%" stop-color="#0369a1"/>
+                </linearGradient>
+                <linearGradient id="oysterBodyGradMini" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#93c5fd"/>
+                    <stop offset="100%" stop-color="#60a5fa"/>
+                </linearGradient>
+            </defs>
+
+            <path d="M 30,230 C 20,330 90,360 225,360 C 360,360 430,330 420,230 C 370,250 310,230 225,240 C 140,230 80,250 30,230 Z" 
+                  fill="url(#shellBottomGradMini)" stroke="#0369a1" stroke-width="4" stroke-linejoin="round"/>
+
+            <path id="oyster-body-mini" 
+                  d="M 140,270 C 140,210 200,200 235,200 C 270,200 320,220 310,275 C 290,305 250,315 225,315 C 190,315 140,300 140,270 Z" 
+                  fill="url(#oysterBodyGradMini)" stroke="#1d4ed8" stroke-width="3"/>
+
+            <g id="shell-top-group-mini">
+                <path d="M 60,180 C 40,110 50,70 90,80 C 120,90 130,130 190,120 C 260,110 280,130 350,150 C 410,170 430,210 410,235 C 330,215 260,225 190,205 C 120,225 90,215 60,180 Z" 
+                      fill="url(#shellTopGradMini)" stroke="#0369a1" stroke-width="4" stroke-linejoin="round"/>
+                <path d="M 90,80 Q 120,170 140,210 M 150,125 Q 180,170 200,205 M 225,120 Q 240,170 260,212 M 295,135 Q 310,180 330,218 M 350,150 Q 370,190 395,225" 
+                      fill="none" stroke="#0284c7" stroke-width="3.5" stroke-linecap="round" opacity="0.4"/>
+            </g>
+
+            <g id="eyes-group-mini">
+                <g class="eyes eyes-happy">
+                    <path class="eyebrow eyebrow-left-mini" d="M 255,100 Q 275,85 295,95" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                    <path class="eyebrow eyebrow-right-mini" d="M 315,100 Q 335,88 355,105" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                    <ellipse cx="280" cy="130" rx="22" ry="25" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                    <ellipse cx="328" cy="138" rx="24" ry="26" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                    <circle cx="284" cy="130" r="10" fill="#0f172a"/> <circle cx="282" cy="126" r="3" fill="#fff"/>
+                    <circle cx="324" cy="138" r="10" fill="#0f172a"/> <circle cx="322" cy="134" r="3" fill="#fff"/>
+                </g>
+                <g class="eyes eyes-scared">
+                    <path class="eyebrow eyebrow-left-mini" d="M 255,102 Q 275,112 295,102" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                    <path class="eyebrow eyebrow-right-mini" d="M 312,105 Q 332,115 352,102" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                    <ellipse cx="280" cy="134" rx="22" ry="21" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                    <ellipse cx="328" cy="140" rx="24" ry="22" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                    <circle cx="276" cy="136" r="7" fill="#0f172a"/>
+                    <circle cx="322" cy="142" r="7" fill="#0f172a"/>
+                </g>
+            </g>
+        </svg>
+        <div id="ai-pet-status-label" class="status-badge-lbl">กำลังดึงข้อมูล...</div>
+    </div>
+</div>
+
+    <div class="alert-box">
+        <div class="alert-box-header">
+            <i class="fa-solid fa-bell"></i> การแจ้งเตือนระบบ (Real-time)
+        </div>
+        <div class="mini-notify-list" id="mini-alert-list">
+            <div class="alert-empty">กำลังตรวจสอบสถานะฟาร์ม...</div>
+        </div>
+    </div>
+</aside>
+    
+
+    <div class="bubble-container" id="bubble-bg"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+/* ===================================================
+   🌊 NEW BALANCED INFOMA STYLE (BIG SIZE & AQUA CYBER)
+   =================================================== */
+
+.info-container {
+    width: 92%;
+    max-width: 1400px;
+    margin: 0 auto 60px auto;
+}
+
+.page-main-title {
+    text-align: center;
+    color: #0369a1;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin: 40px 0 20px 0;
+}
+
+.info-section {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(56, 189, 248, 0.5);
+    border-radius: 24px;
+    padding: 35px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 40px rgba(14, 165, 233, 0.05);
+}
+
+.section-title {
+    color: #0369a1;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-left: 5px solid #0ea5e9;
+    padding-left: 15px;
+}
+
+/* 📰 ระบบ Grid แสดงผลข่าวสารและคลังความรู้แบบหน้าจอใหญ่บาลานซ์เด่นชัด */
+.news-grid, .knowledge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 25px;
+}
+
+/* ⬜ การ์ดข่าวดีไซน์สี่เหลี่ยมสีขาวบริสุทธิ์ 100% ครอบเนื้อหาให้อ่านเด่นง่ายตามสั่ง */
+.news-card, .knowledge-card {
+    background: #ffffff !important;
+    border: 1.5px solid rgba(56, 189, 248, 0.25);
+    border-radius: 18px;
+    padding: 25px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
+    transition: all 0.25s ease;
+}
+.news-card:hover, .knowledge-card:hover {
+    transform: translateY(-4px);
+    border-color: #0ea5e9;
+    box-shadow: 0 12px 30px rgba(14, 165, 233, 0.12);
+}
+
+/* 🏷️ องค์ประกอบย่อยภายในกระดานข่าวสาร */
+.news-badge {
+    position: absolute; top: 15px; right: 15px;
+    background: #ef4444; color: white; padding: 4px 10px;
+    font-size: 0.8rem; font-weight: 700; border-radius: 20px;
+}
+.news-date, .news-source {
+    font-size: 0.9rem; color: #64748b; font-weight: 600; margin-right: 15px;
+}
+.news-title {
+    font-size: 1.25rem; color: #0f172a; font-weight: 700;
+    margin: 15px 0 10px 0; line-height: 1.4;
+}
+.news-description {
+    font-size: 1rem; color: #475569; line-height: 1.5; margin-bottom: 20px;
+}
+
+/* 🔗 ปุ่มกดเข้าไปเปิดอ่านข่าวตัวเต็มขยายขนาดใหญ่กดถนัดมือ */
+.read-more-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: rgba(14, 165, 233, 0.08); color: #0284c7; text-decoration: none;
+    padding: 10px 20px; font-size: 0.95rem; font-weight: 700; border-radius: 12px;
+    transition: all 0.2s ease;
+}
+.read-more-btn:hover {
+    background: #0ea5e9; color: white;
+}
+
+/* กล่องแสดงสถานะโหลดและไม่มีข้อมูล */
+.loading-news, .no-news-box {
+    grid-column: 1 / -1; text-align: center; padding: 40px; color: #0284c7; font-weight: 600;
+}
+.loading-news i, .no-news-box i { font-size: 2.5rem; margin-bottom: 15px; color: #38bdf8; }
+/* ===================================================
+   🌊 GLOBAL AQUARIUM LAYER STYLES
+   =================================================== */
+.aquarium-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 40%, #7dd3fc 100%);
+    z-index: -4;
+}
+.light-rays {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.7) 0%, transparent 60%);
+    z-index: -3;
+    pointer-events: none;
+}
+.water-waves {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 180px;
+    z-index: -2; opacity: 0.6; pointer-events: none;
+    overflow: hidden;
+}
+.wave {
+    position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 70%);
+    border-radius: 43%;
+}
+.wave1 { animation: waveMove 12s infinite linear; }
+.wave2 { animation: waveMove 18s infinite linear; opacity: 0.5; top: 10px; }
+
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bubble-node {
+    position: absolute; bottom: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(56, 189, 248, 0.2) 60%, rgba(255, 255, 255, 0.8) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.6), 0 0 10px rgba(14, 165, 233, 0.2);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+}
+
+.fish-tank {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; overflow: hidden;
+}
+.fish-node {
+    position: absolute; width: 25px; height: 12px;
+    background: linear-gradient(90deg, rgba(2, 132, 199, 0.5), rgba(56, 189, 248, 0.2));
+    border-radius: 50% 80% 50% 50%;
+    box-shadow: 0 0 8px rgba(14, 165, 233, 0.3);
+    animation: swimRight linear infinite;
+}
+.fish-node::after {
+    content: ''; position: absolute; right: -6px; top: 2px;
+    border-left: 8px solid rgba(2, 132, 199, 0.5);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+
+@keyframes swimRight {
+    0% { left: -40px; transform: scaleY(1); }
+    50% { transform: scaleY(0.9) translateY(15px); }
+    100% { left: 105vw; transform: scaleY(1); }
+}

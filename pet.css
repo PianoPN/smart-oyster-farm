@@ -1,0 +1,740 @@
+/* นำเข้าฟอนต์สุด Modern เพื่อลดความรู้สึกเหมือนเว็บแจกฟรี */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-main: #f4f8fb;
+    --card-bg: #ffffff;
+    --border-color: #e2edf5;
+    --text-main: #2d3a4b;
+    --text-muted: #64748b;
+    --primary-blue: #3b82f6;
+    --primary-light: #eff6ff;
+    
+    /* โทนสีของ Badge แต่ละสถานะ */
+    --happy-bg: #f0fdf4; --happy-text: #166534; --happy-border: #bbf7d0;
+    --warning-bg: #fffbeb; --warning-text: #92400e; --warning-border: #fde68a;
+    --danger-bg: #fef2f2; --danger-text: #991b1b; --danger-border: #fecaca;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Thai', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Navbar สะอาดตา */
+nav {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 4%;
+}
+.navbar-inner a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+.navbar-inner a:hover { color: var(--primary-blue); }
+
+/* Layout ปรับ Balance ใหม่ให้กว้าง ลอยตัวสไตล์ Minimalist */
+.pet-page-layout {
+    display: flex;
+    gap: 48px;
+    width: 92%;
+    max-width: 1400px;
+    margin: 40px auto;
+    align-items: flex-start;
+}
+
+/* 📑 ฝั่งซ้าย (แผงเมนูและปุ่มจำลอง) */
+.pet-left-panel {
+    width: 42%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.section-divider-title {
+    margin: 12px 0 4px 0;
+    color: var(--text-main);
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.status-menu-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.status-menu-card:hover {
+    border-color: #cbdcf0;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+}
+
+.menu-status-header h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: blink 1.5s infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+.mood-title-row {
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--text-main);
+}
+
+.pet-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    border-radius: 99px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+#live-narrative {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* รายการจำลองภาวะน้ำ (ซ่อน Scrollbar แบบเก่าให้ดูคลีน) */
+.mood-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+.mood-list-container::-webkit-scrollbar { width: 4px; }
+.mood-list-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+
+.active-realtime {
+    border-color: var(--primary-blue);
+    background: #f8fafc;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+/* 🔮 ฝั่งขวา (จอแสดงผลน้องหอยแบบเหนียวแน่นตามจอ) */
+.pet-right-view {
+    width: 58%;
+    position: sticky;
+    top: 40px;
+}
+
+.pet-display-sticky-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 28px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preview-mode-tag {
+    background: var(--primary-light);
+    color: var(--primary-blue);
+    padding: 8px 20px;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+/* 🦪 โมเดลหอยนางรมตัวใหม่ (SVG Container) */
+.oyster-avatar-box {
+    width: 380px;
+    height: 340px;
+    margin: 20px auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.oyster-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* การควบคุมฟังก์ชันขยับสลับร่างอารมณ์ด้วย CSS Classes */
+#shell-top, #shell-accent {
+    transform-box: fill-box;
+    transform-origin: 50% 90%;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ปิดตา/ปากเริ่มต้น แล้วเปิดตาม Mood คีย์ */
+#mouth-group > *, #eyes-group > g { display: none; }
+
+/* -- การขยับของเอนิเมชันตามอารมณ์ต่างๆ -- */
+
+/* 1. มีความสุข (happy) */
+.oyster-avatar-box.happy #shell-top, 
+.oyster-avatar-box.happy #shell-accent { transform: translateY(-35px) rotate(-8deg); }
+.oyster-avatar-box.happy .eyes-happy,
+.oyster-avatar-box.happy .mouth-happy { display: block; }
+.oyster-avatar-box.happy .pet-bubble { display: block; }
+
+/* 2. เครียดน้ำจืด (scared) */
+.oyster-avatar-box.scared { animation: shakeEffect 0.2s infinite linear; }
+.oyster-avatar-box.scared #shell-top,
+.oyster-avatar-box.scared #shell-accent { transform: translateY(8px); }
+.oyster-avatar-box.scared .eyes-scared,
+.oyster-avatar-box.scared .mouth-scared { display: block; }
+
+/* 3. นอนไม่หลับ (insomnia) */
+.oyster-avatar-box.insomnia #shell-top,
+.oyster-avatar-box.insomnia #shell-accent { transform: translateY(-45px); }
+.oyster-avatar-box.insomnia .eyes-insomnia,
+.oyster-avatar-box.insomnia .mouth-insomnia { display: block; }
+
+/* 4. เปลือกบาง (acid) */
+.oyster-avatar-box.acid #shell-top,
+.oyster-avatar-box.acid #shell-accent { transform: translateY(-10px) rotate(4deg); opacity: 0.9; }
+.oyster-avatar-box.acid .eyes-acid,
+.oyster-avatar-box.acid .mouth-acid { display: block; }
+
+/* 5. อึดอัดโตช้า (alkaline) */
+.oyster-avatar-box.alkaline #shell-top,
+.oyster-avatar-box.alkaline #shell-accent { animation: heavyBreathing 1.2s infinite alternate ease-in-out; }
+.oyster-avatar-box.alkaline .eyes-alkaline,
+.oyster-avatar-box.alkaline .mouth-alkaline { display: block; }
+
+/* 6. จำศีล (hibernating) */
+.oyster-avatar-box.hibernating #shell-top,
+.oyster-avatar-box.hibernating #shell-accent { transform: translateY(12px); }
+.oyster-avatar-box.hibernating .eyes-hibernating,
+.oyster-avatar-box.hibernating .mouth-hibernating { display: block; }
+
+/* 7. สำลักตะกอน (choking) */
+.oyster-avatar-box.choking #shell-top,
+.oyster-avatar-box.choking #shell-accent { animation: coughEffect 0.5s infinite alternate ease-in-out; }
+.oyster-avatar-box.choking .eyes-choking,
+.oyster-avatar-box.choking .mouth-choking { display: block; }
+
+/* 8. หิวโหย (hungry) */
+.oyster-avatar-box.hungry #shell-top,
+.oyster-avatar-box.hungry #shell-accent { transform: translateY(-20px) rotate(-4deg); }
+.oyster-avatar-box.hungry .eyes-hungry,
+.oyster-avatar-box.hungry .mouth-hungry { display: block; }
+
+/* 9. พิษเข้าตัว (toxic) */
+.oyster-avatar-box.toxic { animation: dizzySway 2s infinite ease-in-out; }
+.oyster-avatar-box.toxic #shell-top,
+.oyster-avatar-box.toxic #shell-accent { transform: translateY(-15px) rotate(2deg); }
+.oyster-avatar-box.toxic .eyes-toxic,
+.oyster-avatar-box.toxic .mouth-toxic { display: block; }
+
+/* 10. แออัด (crowded) */
+.oyster-avatar-box.crowded #shell-top,
+.oyster-avatar-box.crowded #shell-accent { transform: translateY(2px) rotate(-2deg); }
+.oyster-avatar-box.crowded .eyes-crowded,
+.oyster-avatar-box.crowded .mouth-crowded { display: block; }
+
+/* 11. พร้อมผสมพันธุ์ (lovey) */
+.oyster-avatar-box.lovey { animation: pulseLoveEffect 1.2s infinite ease-in-out; }
+.oyster-avatar-box.lovey #shell-top,
+.oyster-avatar-box.lovey #shell-accent { transform: translateY(-45px) rotate(-10deg); }
+.oyster-avatar-box.lovey .eyes-lovey,
+.oyster-avatar-box.lovey .mouth-lovey { display: block; }
+.oyster-avatar-box.lovey .pet-heart { display: block; }
+
+/* 12. เวียนหัว คลื่นแรง (stormy) */
+.oyster-avatar-box.stormy { animation: wobbleEffect 0.8s infinite ease-in-out; }
+.oyster-avatar-box.stormy #shell-top,
+.oyster-avatar-box.stormy #shell-accent { transform: translateY(-15px); }
+.oyster-avatar-box.stormy .eyes-stormy,
+.oyster-avatar-box.stormy .mouth-stormy { display: block; }
+
+/* ── Keyframes ความเคลื่อนไหว ── */
+@keyframes shakeEffect { 0%, 100% { transform: translateX(-2px); } 50% { transform: translateX(2px); } }
+@keyframes heavyBreathing { 0% { transform: translateY(-5px); } 100% { transform: translateY(-20px); } }
+@keyframes coughEffect { 0% { transform: translateY(-5px); } 100% { transform: translateY(-35px); } }
+@keyframes dizzySway { 0%, 100% { transform: rotate(-1.5deg); } 50% { transform: rotate(1.5deg); } }
+@keyframes wobbleEffect { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+@keyframes pulseLoveEffect { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+
+/* ฟองสบู่ความสุข */
+.pet-bubble {
+    position: absolute;
+    background: rgba(14, 165, 233, 0.4);
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    bottom: 140px;
+    animation: bubbleUp 2s infinite linear;
+    display: none;
+}
+@keyframes bubbleUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-140px) scale(1.3); opacity: 0; }
+}
+
+/* หัวใจสีชมพูฟินๆ */
+.pet-heart {
+    position: absolute;
+    bottom: 150px;
+    font-size: 1.2rem;
+    display: none;
+    animation: heartUp 2.2s infinite ease-in;
+}
+@keyframes heartUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
+}
+
+/* ป้ายสถานะ & การ์ดข้อความ */
+.pet-status-badge {
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 8px;
+}
+
+/* Mapping Class อารมณ์การเปลี่ยนสีป้าย */
+.badge-happy { background-color: var(--happy-bg); color: var(--happy-text); border: 1px solid var(--happy-border); }
+.badge-warning { background-color: var(--warning-bg); color: var(--warning-text); border: 1px solid var(--warning-border); }
+.badge-scared { background-color: var(--danger-bg); color: var(--danger-text); border: 1px solid var(--danger-border); }
+
+.display-story {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 16px 0 24px 0;
+    line-height: 1.6;
+    max-width: 480px;
+}
+
+/* แผงเหตุผลและวิธีแก้ */
+.mood-details-panel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 24px;
+    text-align: left;
+}
+
+.detail-item-row {
+    padding: 16px 20px;
+    border-radius: 16px;
+}
+.alert-danger-zone { background: var(--danger-bg); border-left: 4px solid #ef4444; }
+.alert-success-zone { background: var(--happy-bg); border-left: 4px solid #22c55e; }
+
+.detail-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.alert-danger-zone .detail-label { color: var(--danger-text); }
+.alert-success-zone .detail-label { color: var(--happy-text); }
+
+.detail-value {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+/* จอมือถือ / แท็บเล็ต ยุบตัวลงแบบ Responsive */
+@media (max-width: 968px) {
+    .pet-page-layout { flex-direction: column; gap: 32px; }
+    .pet-left-panel, .pet-right-view { width: 100%; }
+    .pet-right-view { position: static; }
+    .oyster-avatar-box { width: 320px; height: 290px; }
+}
+/* ── 2. เพิ่ม CSS ส่วนเอนิเมชันให้ท่าทางขยับได้มากกว่าเดิม (ใส่ท้ายไฟล์ pet.css) ── */
+
+/* กำหนดจุดหมุนของเปลือกบนให้อยู่ทางขวาชิดดวงตาตามเรฟ */
+#shell-top-group {
+    transform-box: fill-box;
+    transform-origin: 80% 50%;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 😭 ภาวะเครียด/เศร้า: เปลือกบนปิดลงมาต่ำ คิ้วตกลู่ลง */
+.oyster-avatar-box.scared #shell-top-group,
+.oyster-avatar-box.acid #shell-top-group { transform: translateY(25px) rotate(5deg); }
+.oyster-avatar-box.scared .eyebrow-left { transform: translateY(5px) rotate(15deg); }
+.oyster-avatar-box.scared .eyebrow-right { transform: translateY(8px) rotate(-15deg); }
+
+/* 😳 ภาวะนอนไม่หลับ/ซึม: เปลือกอ้าสูงค้างไว้ ลิ้น (เนื้อหอย) หดเล็กลงด้วยความเหนื่อยล้า */
+.oyster-avatar-box.insomnia #shell-top-group { transform: translateY(-30px) rotate(-12deg); }
+.oyster-avatar-box.insomnia #oyster-body { transform: scale(0.9); transform-origin: center; }
+
+/* 🤮 ภาวะสำลักตะกอน/เวียนหัว: เปลือกขยับอ้า-หุบขึ้นลงรวดเร็วแบบไอสั่น */
+.oyster-avatar-box.choking #shell-top-group { animation: coughShell 0.3s infinite alternate ease-in-out; }
+@keyframes coughShell { 0% { transform: translateY(0); } 100% { transform: translateY(-25px) rotate(-5deg); } }
+
+/* 🥶 ภาวะจำศีล/ซึมหนาว: เปลือกบนปิดสนิททับเนื้อหอยลงมาเลย */
+.oyster-avatar-box.hibernating #shell-top-group { transform: translateY(42px) rotate(3deg); }
+
+/* 🥰 ภาวะฟินพร้อมผสมพันธุ์: เปลือกสั่นพริ้วไหวด้วยความสุข */
+.oyster-avatar-box.lovey #shell-top-group { animation: loveSway 1s infinite alternate ease-in-out; }
+@keyframes loveSway { 0% { transform: translateY(-15px) rotate(-4deg); } 100% { transform: translateY(-25px) rotate(-10deg); } }
+/* ── ซ่อนชุดดวงตาทั้งหมดเป็นค่าเริ่มต้น ── */
+.eye-set {
+    display: none !important;
+}
+
+/* ── เปิดการแสดงผลแบบแมตช์คลาสตรงๆ กับที่ JavaScript อัปเดต ── */
+.oyster-avatar-box.happy .eye-set.happy,
+.oyster-avatar-box.lovey .eye-set.lovey,
+.oyster-avatar-box.scared .eye-set.scared,
+.oyster-avatar-box.acid .eye-set.acid,
+.oyster-avatar-box.insomnia .eye-set.insomnia,
+.oyster-avatar-box.toxic .eye-set.toxic,
+.oyster-avatar-box.stormy .eye-set.stormy,
+.oyster-avatar-box.crowded .eye-set.crowded,
+.oyster-avatar-box.choking .eye-set.choking,
+.oyster-avatar-box.alkaline .eye-set.alkaline,
+.oyster-avatar-box.hibernating .eye-set.hibernating,
+.oyster-avatar-box.hungry .eye-set.hungry {
+    display: block !important;
+}
+
+/* ── กำหนดจุดหมุนฝาบนให้ล็อกสัมพันธ์กับโคนตาทางขวา ── */
+#shell-top-group {
+    transform-box: fill-box;
+    transform-origin: 80% 50%;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 😭 สภาพเครียด / น้ำจืด / กรดสูง : เปลือกและริ้วงุ้มลงมาพร้อมกัน */
+.oyster-avatar-box.scared #shell-top-group,
+.oyster-avatar-box.acid #shell-top-group { 
+    transform: translateY(22px) rotate(4deg); 
+}
+
+/* 😳 สภาพนอนไม่หลับ / แออัด : เปลือกเบิกอ้ากว้างสูงเลิกลัก */
+.oyster-avatar-box.insomnia #shell-top-group,
+.oyster-avatar-box.crowded #shell-top-group { 
+    transform: translateY(-25px) rotate(-10deg); 
+}
+
+/* 🤮 สภาพสำลักตะกอน : ขยับอ้าหุบรัวๆ แบบไอสั่น */
+.oyster-avatar-box.choking #shell-top-group { 
+    animation: coughShell 0.3s infinite alternate ease-in-out; 
+}
+@keyframes coughShell { 
+    0% { transform: translateY(0); } 
+    100% { transform: translateY(-20px) rotate(-4deg); } 
+}
+
+/* 🥶 สภาพจำศีล : ปิดปากสนิททับเนื้อหอยด้านล่าง */
+.oyster-avatar-box.hibernating #shell-top-group { 
+    transform: translateY(40px) rotate(2deg); 
+}
+
+/* ===================================================
+   🌊 LUXURY AQUARIUM & GLASSMORPHISM CORE STYLES (guide.css)
+   =================================================== */
+
+/* 🌌 Aquarium Background Layer */
+.aquarium-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #021526 0%, #032541 40%, #074173 100%);
+    z-index: -4;
+}
+
+/* ☀️ Sun Light Rays Effect */
+.light-rays {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(14, 165, 233, 0.25) 0%, transparent 60%);
+    z-index: -3;
+    pointer-events: none;
+}
+
+/* 🌊 Water Waves Top Overlay */
+.water-waves {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 180px;
+    z-index: -2; opacity: 0.4; pointer-events: none;
+    overflow: hidden;
+}
+.wave {
+    position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 70%);
+    border-radius: 43%;
+}
+.wave1 { animation: waveMove 12s infinite linear; }
+.wave2 { animation: waveMove 18s infinite linear; opacity: 0.5; top: 10px; }
+
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 🫧 Bubble System Engine Container */
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bubble-node {
+    position: absolute; bottom: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(14, 165, 233, 0.1) 60%, rgba(255, 255, 255, 0.6) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 8px rgba(255,255,255,0.5), 0 0 12px rgba(14, 165, 233, 0.3);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+}
+
+/* 🐟 Floating Fish Simulation Container */
+.fish-tank {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; overflow: hidden;
+}
+.fish-node {
+    position: absolute; width: 25px; height: 12px;
+    background: linear-gradient(90deg, rgba(14, 165, 233, 0.4), rgba(56, 189, 248, 0.1));
+    border-radius: 50% 80% 50% 50%;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+    animation: swimRight linear infinite;
+}
+.fish-node::after {
+    content: ''; position: absolute; right: -6px; top: 2px;
+    border-left: 8px solid rgba(14, 165, 233, 0.4);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+
+@keyframes swimRight {
+    0% { left: -40px; transform: scaleY(1); }
+    50% { transform: scaleY(0.9) translateY(15px); }
+    100% { left: 105vw; transform: scaleY(1); }
+}
+
+/* 🎛️ Layout Workspace Container */
+.guide-container {
+    width: 92%; max-width: 1400px;
+    margin: 40px auto; padding-bottom: 60px;
+}
+.guide-header-title {
+    text-align: center; color: #ffffff;
+    font-size: 2.3rem; font-weight: 700;
+    text-shadow: 0 0 15px rgba(14, 165, 233, 0.6);
+    margin-bottom: 8px;
+}
+.guide-subtitle {
+    text-align: center; color: #94a3b8;
+    font-size: 1.1rem; margin-bottom: 45px;
+}
+
+/* 🛠️ Enterprise Multi-Column Grid (3 Columns) */
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* 💎 Premium Glassmorphism & Cyber Ocean Shadow Card */
+.guide-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 
+                inset 0 0 12px rgba(255, 255, 255, 0.02);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+/* 🌊 Ripple Hover & Glow Effect */
+.guide-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 15px 35px rgba(3, 105, 161, 0.5), 
+                0 0 20px rgba(56, 189, 248, 0.25),
+                inset 0 0 15px rgba(56, 189, 248, 0.1);
+}
+
+/* Card Interactive Header Header */
+.card-header {
+    padding: 24px; display: flex;
+    align-items: center; gap: 15px;
+    cursor: pointer; user-select: none;
+}
+.card-icon {
+    font-size: 1.5rem; background: rgba(14, 165, 233, 0.15);
+    padding: 10px; border-radius: 14px;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.2);
+    transition: transform 0.3s ease;
+}
+.guide-card:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+.card-title {
+    font-size: 1.1rem; font-weight: 600;
+    color: #f8fafc; margin: 0; flex-grow: 1;
+}
+.arrow-icon {
+    color: #94a3b8; font-size: 1rem;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 📐 Smooth Slide Content Transition Engine */
+.card-content-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-content {
+    overflow: hidden;
+}
+.card-content p {
+    margin: 0 24px 24px 24px; padding-top: 16px;
+    border-top: 1px dashed rgba(255,255,255,0.1);
+    color: #e2e8f0; font-size: 0.98rem; line-height: 1.6;
+}
+
+/* Active Open Card States */
+.guide-card.active {
+    background: rgba(15, 23, 42, 0.4);
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.2);
+}
+.guide-card.active .card-content-wrapper {
+    grid-template-rows: 1fr;
+}
+.guide-card.active .arrow-icon {
+    transform: rotate(180deg);
+    color: #38bdf8;
+}
+.guide-card.active .card-title {
+    color: #38bdf8;
+}
+
+/* 📱 Responsive Engineering Matrix */
+@media (max-width: 1150px) {
+    .guide-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .guide-header-title { font-size: 2rem; }
+}
+@media (max-width: 720px) {
+    .guide-grid { grid-template-columns: 1fr; gap: 15px; }
+    .guide-header-title { font-size: 1.7rem; }
+    .guide-container { margin: 20px auto; }
+}
+/* ===================================================
+   🌊 GLOBAL AQUARIUM LAYER STYLES
+   =================================================== */
+.aquarium-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 40%, #7dd3fc 100%);
+    z-index: -4;
+}
+.light-rays {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.7) 0%, transparent 60%);
+    z-index: -3;
+    pointer-events: none;
+}
+.water-waves {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 180px;
+    z-index: -2; opacity: 0.6; pointer-events: none;
+    overflow: hidden;
+}
+.wave {
+    position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 70%);
+    border-radius: 43%;
+}
+.wave1 { animation: waveMove 12s infinite linear; }
+.wave2 { animation: waveMove 18s infinite linear; opacity: 0.5; top: 10px; }
+
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bubble-node {
+    position: absolute; bottom: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(56, 189, 248, 0.2) 60%, rgba(255, 255, 255, 0.8) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.6), 0 0 10px rgba(14, 165, 233, 0.2);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+}
+
+.fish-tank {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; overflow: hidden;
+}
+.fish-node {
+    position: absolute; width: 25px; height: 12px;
+    background: linear-gradient(90deg, rgba(2, 132, 199, 0.5), rgba(56, 189, 248, 0.2));
+    border-radius: 50% 80% 50% 50%;
+    box-shadow: 0 0 8px rgba(14, 165, 233, 0.3);
+    animation: swimRight linear infinite;
+}
+.fish-node::after {
+    content: ''; position: absolute; right: -6px; top: 2px;
+    border-left: 8px solid rgba(2, 132, 199, 0.5);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+
+@keyframes swimRight {
+    0% { left: -40px; transform: scaleY(1); }
+    50% { transform: scaleY(0.9) translateY(15px); }
+    100% { left: 105vw; transform: scaleY(1); }
+}

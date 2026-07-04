@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บันทึกประจำวัน - Smart Farm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="diary.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="aquarium-bg"></div>
+    <div class="light-rays"></div>
+    <div class="water-waves">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+    </div>
+    <div id="bubble-container" class="bubble-bg"></div>
+    <div id="aquarium-fish-tank" class="fish-tank"></div>
+    <div id="bubble-bg" class="bubble-bg"></div>
+
+    <nav>
+        <div class="navbar-inner">
+            <a href="dashboard.html" class="home-btn"><i class="fa-solid fa-house"></i> กลับหน้าหลัก</a>
+        </div>
+    </nav>
+
+    <div class="diary-container">
+        <h2 class="diary-title"><i class="fa-solid fa-book-bookmark"></i> บันทึกข้อมูลพฤติกรรมการเลี้ยงประจำวัน</h2>
+        
+        <form id="diaryForm">
+            <input type="hidden" id="edit-id" value="">
+
+            <div class="form-group">
+                <label>🌡️ สถานะอุณหภูมิน้ำในวันนี้</label>
+                <div class="radio-btn-group">
+                    <input type="radio" id="t-low" name="diary_temp" value="ต่ำเกินไป">
+                    <label for="t-low">ต่ำเกินไป</label>
+                    <input type="radio" id="t-norm" name="diary_temp" value="ปกติ" checked>
+                    <label for="t-norm">ปกติ</label>
+                    <input type="radio" id="t-high" name="diary_temp" value="สูงเกินไป">
+                    <label for="t-high">สูงเกินไป</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>🧪 สถานะค่า pH ของน้ำ</label>
+                <div class="radio-btn-group">
+                    <input type="radio" id="ph-acid" name="diary_ph" value="น้อยเกินไป (เป็นกรด)">
+                    <label for="ph-acid">น้อยเกินไป (เป็นกรด)</label>
+                    <input type="radio" id="ph-norm" name="diary_ph" value="ปกติ" checked>
+                    <label for="ph-norm">ปกติ</label>
+                    <input type="radio" id="ph-alk" name="diary_ph" value="มากเกินไป (เป็นด่าง)">
+                    <label for="ph-alk">มากเกินไป (เป็นด่าง)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>📝 สังเกตพฤติกรรมสั้นๆ เพิ่มเติม (กันลืม)</label>
+                <textarea class="txt-area" id="diary_note" rows="3" placeholder="ตัวอย่างเช่น: วันนี้ลองขัดคราบดำออกแล้ว, หอยเปิดฝากรองน้ำปกติ..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>📸 อัปโหลดรูปภาพตัวหอยนางรมประจำวัน</label>
+                <div class="file-upload-zone">
+                    <input type="file" id="diary_img_input" accept="image/*">
+                    <div class="upload-placeholder" id="upload-placeholder">
+                        <i class="fa-regular fa-image"></i>
+                        <p>คลิกเพื่อเลือกรูปภาพหอยนางรม</p>
+                    </div>
+                    <img id="img_preview" class="preview-img" src="" alt="Oyster preview" style="display:none;">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" id="submit-btn" class="btn-submit">💾 บันทึกข้อมูลรายงาน</button>
+                <button type="button" id="cancel-edit-btn" class="btn-cancel" style="display:none;" onclick="resetForm()">ยกเลิกการแก้ไข</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="diary-logs-container">
+        <h3 class="logs-title"><i class="fa-solid fa-clock-rotate-left"></i> บันทึกประจำวันล่าสุด</h3>
+        <div id="logs-list" class="logs-list">
+            </div>
+    </div>
+
+    <script src="diary.js"></script>
+</body>
+</html>

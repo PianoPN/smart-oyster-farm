@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลังความรู้เรื่องหอยนางรม (Oyster Knowledge)</title>
+    <link rel="stylesheet" href="learn.css">
+</head>
+<body>
+<div class="aquarium-bg"></div>
+    <div class="light-rays"></div>
+    <div class="water-waves">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+    </div>
+    <div id="bubble-container" class="bubble-bg"></div>
+    <div id="aquarium-fish-tank" class="fish-tank"></div>
+    <header>
+        <div class="container">
+            <h1>โลกของหอยนางรม (The World of Oysters)</h1>
+            <p>เจาะลึกสายพันธุ์ รสชาติ วงจรชีวิตท้องถิ่นไทย และคุณค่าทางอาหาร</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container nav-tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'species')">สายพันธุ์และรสชาติ</button>
+            <button class="tab-btn" onclick="openTab(event, 'lifecycle')">วงจรชีวิต (แกนท้องถิ่นไทย)</button>
+            <button class="tab-btn" onclick="openTab(event, 'nutrition')">ประโยชน์และคุณค่าทางอาหาร</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <section id="species" class="tab-content active">
+            <h2>สายพันธุ์หอยนางรมและรสชาติ</h2>
+            <p class="intro-text">หอยนางรมแต่ละสายพันธุ์มีเอกลักษณ์ของรสชาติ (Terroir) ที่แตกต่างกันตามแหล่งน้ำและสารอาหาร</p>
+            
+            <div class="grid-container">
+                <div class="card">
+                    <h3>1. หอยนางรมตะโกรม (สายพันธุ์ไทย)</h3>
+                    <p><strong>ลักษณะ:</strong> ตัวใหญ่ เนื้อหนา อวบอ้วน</p>
+                    <p><strong>รสชาติ:</strong> หวานนำ ละมุน ไม่เค็มจัด มีความครีมมี่ ทานคู่กับยอดกระถินและน้ำพริกเผาเข้ากันที่สุด</p>
+                </div>
+                <div class="card">
+                    <h3>2. Pacific Oyster (Crassostrea gigas)</h3>
+                    <p><strong>ลักษณะ:</strong> เปลือกเป็นคลื่นลึก เพาะเลี้ยงแพร่หลายทั่วโลก</p>
+                    <p><strong>รสชาติ:</strong> หวานปนเค็มกำลังดี มีกลิ่นอายของทะเลและบางแหล่งมีรสคล้ายผลไม้หรือถั่ว</p>
+                </div>
+                <div class="card">
+                    <h3>3. Kumamoto (Crassostrea sikamea)</h3>
+                    <p><strong>ลักษณะ:</strong> ตัวเล็ก เปลือกงุ้มลึกคล้ายถ้วย</p>
+                    <p><strong>รสชาติ:</strong> หวานละมุน รสชาติเข้มข้น มีความครีมมี่สูงมาก คล้ายเนย เหมาะสำหรับผู้เริ่มต้น</p>
+                </div>
+                <div class="card">
+                    <h3>4. Belon / European Flat (Ostrea edulis)</h3>
+                    <p><strong>ลักษณะ:</strong> เปลือกแบนกลมคล้ายจาน</p>
+                    <p><strong>รสชาติ:</strong> รสชาติจัดจ้าน มีกลิ่นอายแร่ธาตุสูง (Metallic) เค็ม แฝงรสถั่วและทองแดง เป็นที่ชื่นชอบของนักทานระดับสูง</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="lifecycle" class="tab-content">
+            <h2>วงจรชีวิตหอยนางรม (แกนความรู้ท้องถิ่นไทย)</h2>
+            <p class="intro-text">แผนภาพและขั้นตอนการเจริญเติบโตของหอยนางรมในธรรมชาติและฟาร์มท้องถิ่นไทย</p>
+            
+            <div class="image-container">
+                <img src="Gemini_Generated_Image_3woop53woop53woo.png" alt="วงจรชีวิตของหอยนางรม Oyster Life Cycle" class="lifecycle-img">
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-badge">1</div>
+                    <div class="timeline-panel">
+                        <h3>ระยะไข่และตัวอ่อนลอยน้ำ (Planktonic Larvae)</h3>
+                        <p><strong>ระยะเวลา:</strong> ประมาณ 2-3 สัปดาห์แรก</p>
+                        <p>หอยนางรมเพศผู้และเมียจะปล่อยสเปิร์มและไข่มาปฏิสนธิในน้ำ ตัวอ่อนที่ฟักออกมาจะลอยไปตามกระแสน้ำ กินแพลงก์ตอนพืชขนาดเล็กเป็นอาหาร</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-badge">2</div>
+                    <div class="timeline-panel">
+                        <h3>ระยะลงเกาะ (Spat / Attachment Stage)</h3>
+                        <p><strong>ระยะเวลา:</strong> ช่วงปลายสัปดาห์ที่ 3</p>
+                        <p>ตัวอ่อนจะเริ่มพัฒนา "เท้า" เพื่อหาที่ยึดเกาะที่มั่นคง เช่น เปลือกหอยเก่า ก้อนหิน หรือวัสดุล่อเกาะที่ชาวประมงเตรียมไว้ (เช่น ปูนซีเมนต์) เมื่อเกาะติดแล้วจะเปลี่ยนรูปร่างและไม่ย้ายที่อีกเลยตลอดชีวิต เรียกว่า "ลูกหอย (Spat)"</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-badge">3</div>
+                    <div class="timeline-panel">
+                        <h3>ระยะหอยรุ่นเจริญเติบโต (Juvenile to Adult)</h3>
+                        <p><strong>ระยะเวลา:</strong> 6 เดือน - 1 ปี</p>
+                        <p>ในท้องถิ่นไทย (เช่น แหล่งเลี้ยงในอ่าวบ้านดอน จ.สุราษฎร์ธานี หรือ จ.จันทบุรี) หอยจะเติบโตอย่างรวดเร็วเนื่องจากน้ำมีอุณหภูมิอุ่นและอาหารสมบูรณ์ ชาวประมงจะคอยดูแลระบบแพหรือราวเชือกให้กระแสน้ำไหลผ่านสะดวก</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-badge">4</div>
+                    <div class="timeline-panel">
+                        <h3>ระยะสมบูรณ์พันธุ์และเก็บเกี่ยว (Harvest Stage)</h3>
+                        <p><strong>ระยะเวลา:</strong> 1 ปี - 1 ปีครึ่งขึ้นไป</p>
+                        <p>หอยนางรมไทย (โดยเฉพาะหอยตะโกรม) จะโตเต็มที่ได้ขนาดตามตลาดต้องการ (ประมาณ 3-4 นิ้วขึ้นไป) เนื้อจะมีความสมบูรณ์ เพศผู้และเพศเมียพร้อมที่จะสืบพันธุ์เพื่อเวียนกลับไปสู่ระยะแรกต่อไป</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nutrition" class="tab-content">
+            <h2>ประโยชน์และคุณค่าทางอาหาร</h2>
+            <p class="intro-text">หอยนางรมได้รับการขนานนามว่าเป็น "นมแห่งท้องทะเล" เนื่องจากอุดมไปด้วยสารอาหารที่มีประโยชน์สูง</p>
+            
+            <div class="nutrition-container">
+                <div class="nutrition-box">
+                    <h3>🌟 แร่ธาตุและวิตามินสำคัญ</h3>
+                    <ul>
+                        <li><strong>ซิงค์ (Zinc / สังกะสี):</strong> มีสารซิงค์สูงที่สุดในบรรดาอาหารทั้งหมด ช่วยเสริมสร้างภูมิต้านทาน และบำรุงระบบสืบพันธุ์</li>
+                        <li><strong>วิตามินบี 12 (Vitamin B12):</strong> บำรุงระบบประสาทและสมอง</li>
+                        <li><strong>ธาตุเหล็ก (Iron):</strong> ช่วยในการสร้างเม็ดเลือดแดง ป้องกันโรคโลหิตจาง</li>
+                        <li><strong>โอเมก้า 3 (Omega-3 Fatty Acids):</strong> บำรุงหัวใจและลดระดับคอเลสเตอรอลชนิดไม่ดี</li>
+                    </ul>
+                </div>
+                
+                <div class="nutrition-box">
+                    <h3>💪 ประโยชน์ต่อร่างกาย</h3>
+                    <ul>
+                        <li><strong>พลังงานต่ำ โปรตีนสูง:</strong> เหมาะสำหรับผู้ที่ควบคุมน้ำหนักและต้องการเสริมสร้างกล้ามเนื้อ</li>
+                        <li><strong>สารต้านอนุมูลอิสระ:</strong> มีสารเฉพาะตัวที่ชื่อว่า <em>D-aspartic acid</em> และ <em>NMDA</em> ช่วยกระตุ้นฮอร์โมนและลดความเครียด</li>
+                        <li><strong>บำรุงผิวพรรณ:</strong> สังกะสีคอลลาเจนช่วยซ่อมแซมเซลล์ผิวและลดการเกิดสิว</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn-highlight">ดาวน์โหลดคู่มือโภชนาการ</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 เว็บไซต์ให้ความรู้หอยนางรมไทยและสากล. สงวนลิขสิทธิ์.</p>
+    </footer>
+
+    <script src="learn.js"></script>
+</body>
+</html>

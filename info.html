@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้อมูลย้อนหลัง - Smart Farm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="info.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 🔥 Firebase (ใช้ฐานข้อมูลเดียวกับ dashboard.html) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body class="info-page">
+    
+    <div class="aquarium-bg"></div>
+    <div class="light-rays"></div>
+    <div class="water-waves">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+    </div>
+    <div id="bubble-container" class="bubble-bg"></div>
+    <div id="aquarium-fish-tank" class="fish-tank"></div>
+
+    <nav>
+        <div class="navbar-inner">
+            <a href="dashboard.html" class="home-btn">
+                <i class="fas fa-home"></i> กลับหน้าหลัก
+            </a>
+        </div>
+    </nav>
+
+    <div class="history-container glass-card">
+        <h2 class="history-title">
+            <i class="fa-solid fa-clock-rotate-left"></i> สถิติข้อมูลย้อนหลังเซนเซอร์
+        </h2>
+        <p class="history-subtitle">เลือกประเภทเซนเซอร์ด้านล่างเพื่อตรวจสอบบันทึกย้อนหลัง 24 ชั่วโมงแบบรายชั่วโมง</p>
+        
+        <div class="control-panel">
+            <button class="type-btn active" id="btn-temp" onclick="setType('temp')">
+                <i class="fa-solid fa-temperature-half"></i> อุณหภูมิ
+            </button>
+            <button class="type-btn" id="btn-salt" onclick="setType('salt')">
+                <i class="fa-solid fa-water"></i> ความเค็ม
+            </button>
+            <button class="type-btn" id="btn-ph" onclick="setType('ph')">
+                <i class="fa-solid fa-flask"></i> ค่า pH
+            </button>
+        </div>
+
+        <div class="chart-white-box">
+            <div class="chart-wrapper">
+                <canvas id="farmChart"></canvas>
+                <div id="no-data-overlay" class="no-data-overlay" style="display:none;">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <p>ไม่พบข้อมูล</p>
+                    <span>ยังไม่ได้เชื่อมต่อบอร์ดเซนเซอร์ หรือยังไม่มีข้อมูลย้อนหลังในช่วงเวลานี้</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="info.js"></script>
+</body>
+</html>

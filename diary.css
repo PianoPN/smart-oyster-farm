@@ -1,0 +1,384 @@
+/* ==========================================
+   📝 สไตล์เฉพาะหน้าบันทึกประจำวันแบบมินิมอล (diary.css)
+   ========================================== */
+
+/* ฟองอากาศละมุนหลังจอ */
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+.bubble {
+    position: absolute;
+    bottom: -50px;
+    background: rgba(14, 165, 233, 0.08);
+    border-radius: 50%;
+    animation: floatUp 8s infinite linear;
+}
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-105vh) scale(1.2); opacity: 0; }
+}
+
+/* คอนเทนเนอร์ฟอร์ม */
+.diary-container { 
+    width: 90%; 
+    max-width: 750px; 
+    margin: 40px auto 20px auto; 
+    background: #fff; 
+    border: 2px solid #E6F2FA; 
+    border-radius: 24px; 
+    padding: 35px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02); 
+}
+
+.diary-title {
+    margin: 0 0 30px 0;
+    color: #0d4690;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.form-group { 
+    margin-bottom: 25px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.form-group label { 
+    font-weight: 600; 
+    color: #4C2E1A; 
+    font-size: 1rem; 
+}
+
+/* ตัวเลือกสถานะแนวโมเดิร์นมินิมอล */
+.radio-btn-group { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 12px; 
+}
+
+.radio-btn-group label { 
+    display: inline-block; 
+    padding: 10px 20px; 
+    border: 2px solid #E6F2FA; 
+    border-radius: 16px; 
+    background: #fff; 
+    color: #7A5C49; 
+    cursor: pointer; 
+    font-size: 0.95rem; 
+    font-weight: 500; 
+    transition: all 0.2s ease; 
+}
+
+.radio-btn-group input[type="radio"] { 
+    display: none; 
+}
+
+.radio-btn-group input[type="radio"]:checked + label { 
+    background-color: #ebf8ff; 
+    border-color: #3182ce; 
+    color: #3182ce; 
+    font-weight: bold; 
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(49, 130, 206, 0.08);
+}
+
+/* กล่องข้อความ */
+.txt-area { 
+    width: 100%; 
+    border: 2px solid #E6F2FA; 
+    border-radius: 16px; 
+    padding: 14px; 
+    box-sizing: border-box; 
+    font-family: inherit; 
+    font-size: 0.95rem; 
+    resize: vertical; 
+    outline: none;
+    transition: 0.2s;
+}
+.txt-area:focus {
+    border-color: #3182ce;
+}
+
+/* โซนอัปโหลดรูปภาพมินิมอล */
+.file-upload-zone {
+    border: 2px dashed #bee3f8;
+    background: #f7fafc;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.file-upload-zone:hover {
+    background: #edf2f7;
+    border-color: #3182ce;
+}
+.file-upload-zone input[type="file"] {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.upload-placeholder {
+    color: #718096;
+}
+.upload-placeholder i {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: #3182ce;
+}
+
+/* รูปภาพตัวอย่าง */
+.preview-img { 
+    max-width: 100%; 
+    max-height: 250px; 
+    object-fit: cover; 
+    border-radius: 12px; 
+    margin: 10px auto 0 auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* ปุ่มกดกึ่งกลาง */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+.btn-submit { 
+    background-color: #3182ce; 
+    color: #fff; 
+    border: none; 
+    padding: 12px 35px; 
+    font-size: 1rem; 
+    font-weight: bold; 
+    border-radius: 50px; 
+    cursor: pointer; 
+    transition: 0.2s; 
+    box-shadow: 0 4px 12px rgba(49, 130, 206, 0.2);
+}
+.btn-submit:hover { 
+    background-color: #2b6cb0; 
+    transform: translateY(-2px); 
+}
+.btn-cancel {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* ==========================================
+   🧱 โซนแสดงแถบบันทึกย้อนหลังล่าสุดด้านล่าง
+   ========================================== */
+.diary-logs-container {
+    width: 90%;
+    max-width: 750px;
+    margin: 20px auto 60px auto;
+}
+.logs-title {
+    color: #4C2E1A;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #E6F2FA;
+    padding-bottom: 10px;
+}
+.logs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.no-logs {
+    text-align: center;
+    color: #a0aec0;
+    padding: 30px;
+    background: #fff;
+    border: 2px dashed #E6F2FA;
+    border-radius: 16px;
+    font-size: 0.95rem;
+}
+
+/* กล่องรายการบันทึกรายวัน */
+.log-card {
+    background: #ffffff;
+    border: 2px solid #E6F2FA;
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    gap: 24px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+    align-items: flex-start;
+}
+.log-img-box {
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #edf2f7;
+    border: 1px solid #E6F2FA;
+}
+.log-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.log-info-box {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.log-date {
+    font-size: 0.85rem;
+    color: #3182ce;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+/* การแสดงสถานะแนวตั้งตามสั่ง */
+.status-item {
+    font-size: 0.95rem;
+    color: #4a5568;
+    line-height: 1.4;
+}
+.status-label {
+    font-weight: bold;
+    color: #7A5C49;
+}
+.log-note {
+    margin-top: 6px;
+    font-size: 0.95rem;
+    color: #2d3748;
+    background: #f7fafc;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border-left: 4px solid #bee3f8;
+}
+
+/* ปุ่มควบคุม แก้ไข / ลบ */
+.log-actions {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+}
+.btn-action {
+    border: none;
+    background: #f7fafc;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    border: 1px solid #e2e8f0;
+}
+.btn-action.edit { color: #3182ce; }
+.btn-action.edit:hover { background: #ebf8ff; border-color: #3182ce; }
+.btn-action.delete { color: #e53e3e; }
+.btn-action.delete:hover { background: #fff5f5; border-color: #e53e3e; }
+
+/* ตอบสนองจอเล็ก */
+@media(max-width: 600px) {
+    .log-card { flex-direction: column; gap: 15px; padding-top: 60px; }
+    .log-img-box { width: 100%; height: 200px; }
+    .log-actions { top: 15px; right: 15px; }
+}
+
+/* ===================================================
+   🌊 GLOBAL AQUARIUM LAYER STYLES
+   =================================================== */
+.aquarium-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 40%, #7dd3fc 100%);
+    z-index: -4;
+}
+.light-rays {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.7) 0%, transparent 60%);
+    z-index: -3;
+    pointer-events: none;
+}
+.water-waves {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 180px;
+    z-index: -2; opacity: 0.6; pointer-events: none;
+    overflow: hidden;
+}
+.wave {
+    position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 70%);
+    border-radius: 43%;
+}
+.wave1 { animation: waveMove 12s infinite linear; }
+.wave2 { animation: waveMove 18s infinite linear; opacity: 0.5; top: 10px; }
+
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bubble-node {
+    position: absolute; bottom: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(56, 189, 248, 0.2) 60%, rgba(255, 255, 255, 0.8) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.6), 0 0 10px rgba(14, 165, 233, 0.2);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+}
+
+.fish-tank {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; overflow: hidden;
+}
+.fish-node {
+    position: absolute; width: 25px; height: 12px;
+    background: linear-gradient(90deg, rgba(2, 132, 199, 0.5), rgba(56, 189, 248, 0.2));
+    border-radius: 50% 80% 50% 50%;
+    box-shadow: 0 0 8px rgba(14, 165, 233, 0.3);
+    animation: swimRight linear infinite;
+}
+.fish-node::after {
+    content: ''; position: absolute; right: -6px; top: 2px;
+    border-left: 8px solid rgba(2, 132, 199, 0.5);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+
+@keyframes swimRight {
+    0% { left: -40px; transform: scaleY(1); }
+    50% { transform: scaleY(0.9) translateY(15px); }
+    100% { left: 105vw; transform: scaleY(1); }
+}

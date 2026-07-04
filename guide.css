@@ -1,0 +1,367 @@
+/* ==========================================
+   🎨 สไตล์มินิมอลหน้าคู่มือแบบกดเปิด (guide.css)
+   ========================================== */
+
+/* พื้นหลังฟองอากาศ */
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+.bubble {
+    position: absolute;
+    bottom: -50px;
+    background: rgba(14, 165, 233, 0.08);
+    border-radius: 50%;
+    animation: floatUp 7s infinite linear;
+}
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-105vh) scale(1.2); opacity: 0; }
+}
+
+/* ส่วนของแถบ Navbar ชั้นบน */
+nav {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 15px 0;
+}
+.navbar-inner {
+    width: 92%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* จัดปุ่มแยกฝั่งซ้าย-ขวาอย่างสวยงาม */
+    align-items: center;
+}
+.home-btn {
+    color: #0d4690;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: 0.2s;
+}
+.home-btn:hover { color: #0ea5e9; }
+
+/* 🌟 ปุ่มตั้งค่าโปรไฟล์ฝั่งขวาเพิ่มเติม */
+.profile-settings-btn {
+    color: #555555;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    background: #f3f4f6;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: 0.3s ease;
+}
+.profile-settings-btn:hover {
+    background: #e5e7eb;
+    color: #0d4690;
+}
+
+.guide-container { 
+    width: 92%; 
+    max-width: 1400px; 
+    margin: 40px auto; 
+}
+
+.guide-header-title {
+    text-align: center;
+    color: #0d4690;
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.guide-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.05rem;
+    margin-bottom: 40px;
+}
+
+/* 🛠️ จัดโครงข่าย Grid แถวละ 3 บล็อกสี่เหลี่ยมมินิมอลแนวนอน */
+.guide-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px; 
+    margin-top: 20px; 
+}
+
+/* ดีไซน์มินิมอลการ์ดคู่มือ (สไตล์ดีเทลลื่นไหล) */
+.guide-card { 
+    background: #FFFFFF; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 16px; 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.guide-card:hover { 
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(14, 165, 233, 0.06);
+    border-color: #bae6fd;
+}
+
+/* หัวข้อปุ่มกดโครงสร้าง Details */
+.guide-summary {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    list-style: none; /* ซ่อนสามเหลี่ยมดีฟอลต์ของเบราว์เซอร์ */
+    outline: none;
+}
+.guide-summary::-webkit-details-marker {
+    display: none; /* ซ่อนสามเหลี่ยมบนซาฟารี */
+}
+
+.card-icon {
+    font-size: 1.5rem;
+    background: #f0f9ff;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+/* ส่วนขยายเนื้อหาวิธีทำสีน้ำตาลตามสั่งเมื่อถูกเปิดออก */
+.card-content {
+    padding: 0 24px 24px 24px;
+    border-top: 1px dashed #f1f5f9;
+    background: #fffdfb; /* พื้นหลังสีนวลตา */
+    font-size: 0.95rem;
+    color: #7A5C49; /* คุมโทนสีน้ำตาลเข้มตามบรีฟเด็ด */
+    line-height: 1.6;
+}
+
+/* เมื่อกดเปิดเปลี่ยนสไตล์หัวข้อให้เด่นขึ้น */
+.guide-card[open] {
+    border-color: #0ea5e9;
+    box-shadow: 0 10px 25px rgba(14, 165, 233, 0.08);
+}
+.guide-card[open] .card-title {
+    color: #0ea5e9;
+}
+
+/* ปรับการแสดงผลหน้าจอขนาดเล็กอัตโนมัติ */
+@media (max-width: 1024px) {
+    .guide-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 650px) {
+    .guide-grid { grid-template-columns: 1fr; }
+}
+
+/* ===================================================
+   🌊 BRIGHT CYBER AQUA & GLASSMORPHISM CORE STYLES (guide.css)
+   =================================================== */
+
+/* 🌌 เปลี่ยนพื้นหลังให้เป็นโทนสีฟ้าสว่าง ไล่เฉดสไตล์ Aquarium ตอนกลางวัน */
+.aquarium-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 40%, #7dd3fc 100%);
+    z-index: -4;
+}
+
+/* ☀️ เพิ่มความสว่างและประกายของแสงแดดส่องใต้ผิวน้ำ (Light Rays) */
+.light-rays {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.7) 0%, transparent 60%);
+    z-index: -3;
+    pointer-events: none;
+}
+
+/* 🌊 คลื่นน้ำด้านบน ปรับให้ดูซอฟต์ละมุนเข้ากับพื้นหลังสีฟ้าสว่าง */
+.water-waves {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 180px;
+    z-index: -2; opacity: 0.6; pointer-events: none;
+    overflow: hidden;
+}
+.wave {
+    position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 70%);
+    border-radius: 43%;
+}
+.wave1 { animation: waveMove 12s infinite linear; }
+.wave2 { animation: waveMove 18s infinite linear; opacity: 0.5; top: 10px; }
+
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 🫧 เม็ดฟองอากาศ ปรับให้สะท้อนแสงสีขาวและฟ้าอ่อนดูสะอาดตา */
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bubble-node {
+    position: absolute; bottom: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(56, 189, 248, 0.2) 60%, rgba(255, 255, 255, 0.8) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.6), 0 0 10px rgba(14, 165, 233, 0.2);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+}
+
+/* 🐟 ตัวปลาจำลอง ปรับสีน้ำเงินสว่างเพื่อให้ตัดกับพื้นหลังฟ้าพาสเทล */
+.fish-tank {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; overflow: hidden;
+}
+.fish-node {
+    position: absolute; width: 25px; height: 12px;
+    background: linear-gradient(90deg, rgba(2, 132, 199, 0.5), rgba(56, 189, 248, 0.2));
+    border-radius: 50% 80% 50% 50%;
+    box-shadow: 0 0 8px rgba(14, 165, 233, 0.3);
+    animation: swimRight linear infinite;
+}
+.fish-node::after {
+    content: ''; position: absolute; right: -6px; top: 2px;
+    border-left: 8px solid rgba(2, 132, 199, 0.5);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+
+@keyframes swimRight {
+    0% { left: -40px; transform: scaleY(1); }
+    50% { transform: scaleY(0.9) translateY(15px); }
+    100% { left: 105vw; transform: scaleY(1); }
+}
+
+/* 🎛️ Layout Container */
+.guide-container {
+    width: 92%; max-width: 1400px;
+    margin: 40px auto; padding-bottom: 60px;
+}
+/* ปรับตัวอักษรหัวข้อให้ใช้สีน้ำเงินเข้มหรูหรา เพื่อให้อ่านง่ายบนพื้นหลังสีฟ้าสว่าง */
+.guide-header-title {
+    text-align: center; color: #0369a1;
+    font-size: 2.3rem; font-weight: 700;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+}
+.guide-subtitle {
+    text-align: center; color: #0c4a6e;
+    font-size: 1.1rem; margin-bottom: 45px;
+}
+
+/* 🛠️ Grid Layout */
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* 💎 ปรับการ์ด Glassmorphism ให้มีความเป็นกระจกขาวใสโปร่งแสง (ไม่มืดแล้ว) */
+.guide-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(14, 165, 233, 0.08), 
+                inset 0 0 12px rgba(255, 255, 255, 0.3);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+/* 🌊 แสงเงาตอน Hover ปรับเป็นเรืองแสงฟ้าน้ำทะเลนีออนแบบสดใส (Aqua Glow Shadow) */
+.guide-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(14, 165, 233, 0.5);
+    box-shadow: 0 15px 30px rgba(14, 165, 233, 0.25), 
+                0 0 20px rgba(56, 189, 248, 0.4),
+                inset 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Card Header */
+.card-header {
+    padding: 24px; display: flex;
+    align-items: center; gap: 15px;
+    cursor: pointer; user-select: none;
+}
+.card-icon {
+    font-size: 1.5rem; background: rgba(14, 165, 233, 0.12);
+    padding: 10px; border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(14, 165, 233, 0.1);
+    transition: transform 0.3s ease;
+}
+.guide-card:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+/* ตัวหนังสือบนการ์ดใช้สีน้ำเงินเทาเข้มเพื่อให้อ่านง่ายคมชัด */
+.card-title {
+    font-size: 1.1rem; font-weight: 600;
+    color: #0f172a; margin: 0; flex-grow: 1;
+}
+.arrow-icon {
+    color: #64748b; font-size: 1rem;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 📐 Accordion Slide Animation */
+.card-content-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-content {
+    overflow: hidden;
+}
+/* ส่วนขยายเนื้อหากล่องวิธีทำ ปรับเป็นพื้นหลังขาวน้ำทะเลอ่อนๆ ตัวอักษรสีน้ำตาลเข้มตามบรีฟดั้งเดิมอ่านง่ายชัดเจน */
+.card-content p {
+    margin: 0 24px 24px 24px; padding-top: 16px;
+    border-top: 1px dashed rgba(14, 165, 233, 0.2);
+    color: #4c2e1a; font-size: 0.98rem; line-height: 1.6;
+}
+
+/* Active Open Card States */
+.guide-card.active {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: #0ea5e9;
+    box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
+}
+.guide-card.active .card-content-wrapper {
+    grid-template-rows: 1fr;
+}
+.guide-card.active .arrow-icon {
+    transform: rotate(180deg);
+    color: #0ea5e9;
+}
+.guide-card.active .card-title {
+    color: #0284c7;
+}
+
+/* 📱 Responsive Engineering Matrix */
+@media (max-width: 1150px) {
+    .guide-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .guide-header-title { font-size: 2rem; }
+}
+@media (max-width: 720px) {
+    .guide-grid { grid-template-columns: 1fr; gap: 15px; }
+    .guide-header-title { font-size: 1.7rem; }
+    .guide-container { margin: 20px auto; }
+}

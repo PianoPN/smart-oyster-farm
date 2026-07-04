@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="th">
+  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ปฏิทินเก็บหอยนางรม</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="work.css">
+</head>
+<body>
+    
+    <nav>
+        <div class="top-navbar">
+    <div class="navbar-inner">
+        <a href="dashboard.html" class="home-btn">
+            <i class="fas fa-home"></i> กลับหน้าหลัก
+        </a>
+    </div>
+</div>
+    <div class="phone-container">
+        <header class="app-header">
+            <div class="header-title">
+                <i class="fa-solid fa-oyster"></i>
+                <h1>ปฏิทินเลี้ยงหอยนางรม</h1>
+            </div>
+            <div class="current-date-badge" id="currentDateBadge">---</div>
+        </header>
+
+        <section class="setup-section">
+            <div class="input-group">
+                <label for="startDate"><i class="fa-regular fa-calendar-plus"></i> เลือกวันเริ่มเลี้ยง:</label>
+                <input type="date" id="startDate">
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="harvestedCheck">
+                <label for="harvestedCheck">✅ เก็บเกี่ยวเรียบร้อยแล้ว</label>
+            </div>
+            <button id="calculateBtn" class="btn-primary"><i class="fa-solid fa-sync"></i> อัปเดตปฏิทิน</button>
+        </section>
+
+        <main class="calendar-section">
+            <div class="calendar-nav">
+                <button id="prevMonthBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                <h2 id="monthYearDisplay">มกราคม 2026</h2>
+                <button id="nextMonthBtn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <div class="calendar-grid">
+                <div class="day-name">อา</div>
+                <div class="day-name">จ</div>
+                <div class="day-name">อ</div>
+                <div class="day-name">พ</div>
+                <div class="day-name">พฤ</div>
+                <div class="day-name">ศ</div>
+                <div class="day-name">ส</div>
+                <div id="calendarDays" class="days-container"></div>
+            </div>
+        </main>
+
+        <section class="status-card" id="statusCard">
+            <div class="status-header">
+                <span class="status-dot" id="statusDot"></span>
+                <h3 id="statusTitle">กรุณาเลือกวันเริ่มเลี้ยง</h3>
+            </div>
+            <p class="status-countdown" id="statusCountdown">-</p>
+            <hr>
+            <p class="status-desc" id="statusDesc">เลือกวันเริ่มต้นด้านบน เพื่อคำนวณระยะเวลาการเติบโตของหอยนางรมในรอบนี้</p>
+        </section>
+    </div>
+
+    <script src="work.js"></script>
+</body>
+</html>

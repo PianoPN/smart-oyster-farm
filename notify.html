@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>การแจ้งเตือน - Smart Farm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="aquarium-bg"></div>
+    <div class="light-rays"></div>
+    <div class="water-waves">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+    </div>
+    <div id="bubble-container" class="bubble-bg"></div>
+    <div id="aquarium-fish-tank" class="fish-tank"></div>
+    <nav>
+        <div class="navbar-inner">
+            <a href="dashboard.html" class="home-btn">
+                <i class="fas fa-home"></i> กลับหน้าหลัก
+            </a>
+        </div>
+    </nav>
+    
+    <h1>การแจ้งเตือนระบบ</h1>
+    
+    <div class="notification-container">
+        <div class="notify-header">
+            <h2>รายการแจ้งเตือนระบบ (เรียลไทม์)</h2>
+            <button id="clear-all" class="btn-clear" onclick="clearAllNotifications()">✔️ อ่านแล้วทั้งหมด</button>
+        </div>
+
+        <div id="notification-list">
+            <div class="loading-notify">กำลังตรวจสอบสถานะเซนเซอร์จริง...</div>
+        </div>
+    </div>
+
+    <script src="notify-script.js"></script>
+</body>
+</html>

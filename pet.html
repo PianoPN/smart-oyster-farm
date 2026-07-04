@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oyster Twin Pet AI - Smart Farm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="aquarium-bg"></div>
+    <div class="light-rays"></div>
+    <div class="water-waves">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+    </div>
+    <div id="bubble-container" class="bubble-bg"></div>
+    <div id="aquarium-fish-tank" class="fish-tank"></div>
+    <nav>
+        <div class="navbar-inner">
+            <a href="dashboard.html" class="home-btn"><i class="fa-solid fa-house"></i> กลับหน้าหลัก</a>
+        </div>
+    </nav>
+
+    <div class="pet-page-layout">
+        <div class="pet-left-panel">
+            <div class="status-menu-card active-realtime" id="btn-realtime" onclick="switchToRealtime()">
+                <div class="menu-status-header">
+                    <span class="live-dot"></span>
+                    <h3>สถานะน้องหอยปัจจุบัน (Real-time)</h3>
+                </div>
+                <div class="menu-status-body">
+                    <div id="live-badge" class="pet-badge badge-happy">กำลังดึงข้อมูล...</div>
+                    <p id="live-narrative">ระบบกำลังประเมินอารมณ์จากเซนเซอร์ฟาร์มจริงสักครู่...</p>
+                </div>
+            </div>
+
+            <h4 class="section-divider-title">🔍 คลิกจำลองดูพฤติกรรม & วิธีแก้ไข</h4>
+
+            <div class="mood-list-container">
+                <div class="status-menu-card" id="mood-happy" onclick="previewMood('happy')">
+                    <div class="mood-title-row">🥰 ภาวะสมบูรณ์ (ค่าน้ำสมบูรณ์แบบ)</div>
+                </div>
+                <div class="status-menu-card" id="mood-scared" onclick="previewMood('scared')">
+                    <div class="mood-title-row">😭 ภาวะเครียด (น้ำจืดเกินไป)</div>
+                </div>
+                <div class="status-menu-card" id="mood-insomnia" onclick="previewMood('insomnia')">
+                    <div class="mood-title-row">😳 ภาวะนอนไม่หลับ (น้ำร้อน/ออกซิเจนต่ำ)</div>
+                </div>
+                <div class="status-menu-card" id="mood-acid" onclick="previewMood('acid')">
+                    <div class="mood-title-row">💔 ภาวะเปลือกบางเปราะ (น้ำเป็นกรด)</div>
+                </div>
+                <div class="status-menu-card" id="mood-alkaline" onclick="previewMood('alkaline')">
+                    <div class="mood-title-row">🤢 ภาวะอึดอัดโตช้า (น้ำเป็นด่างสูง)</div>
+                </div>
+                <div class="status-menu-card" id="mood-hibernating" onclick="previewMood('hibernating')">
+                    <div class="mood-title-row">🥶 ภาวะจำศีลปิดเปลือก (น้ำเย็นเกินไป)</div>
+                </div>
+                <div class="status-menu-card" id="mood-choking" onclick="previewMood('choking')">
+                    <div class="mood-title-row">🤮 ภาวะสำลักตะกอน (น้ำขุ่นจัด)</div>
+                </div>
+                <div class="status-menu-card" id="mood-hungry" onclick="previewMood('hungry')">
+                    <div class="mood-title-row">🍽️ ภาวะหิวโหย (แพลงก์ตอนน้อยเกินไป)</div>
+                </div>
+                <div class="status-menu-card" id="mood-toxic" onclick="previewMood('toxic')">
+                    <div class="mood-title-row">☠️ ภาวะพิษเข้าตัว (สารปนเปื้อน)</div>
+                </div>
+                <div class="status-menu-card" id="mood-crowded" onclick="previewMood('crowded')">
+                    <div class="mood-title-row">😣 ภาวะแออัด (ความหนาแน่นสูงเกินไป)</div>
+                </div>
+                <div class="status-menu-card" id="mood-lovey" onclick="previewMood('lovey')">
+                    <div class="mood-title-row">😍 ภาวะฟินพร้อมผสมพันธุ์ (น้ำดีเยี่ยมพิเศษ)</div>
+                </div>
+                <div class="status-menu-card" id="mood-stormy" onclick="previewMood('stormy')">
+                    <div class="mood-title-row">🌊 ภาวะเวียนหัว (คลื่น/กระแสน้ำแรง)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pet-right-view">
+            <div class="pet-display-sticky-box">
+                <div class="preview-mode-tag" id="view-mode-title">โหมด: Real-time ตรวจสอบฟาร์มจริง</div>
+
+              <div class="oyster-avatar-box" id="pet-oyster-group">
+    <div class="pet-bubble" style="left:25%; animation-delay: 0s;"></div>
+    <div class="pet-bubble" style="left:45%; animation-delay: 0.5s;"></div>
+    <div class="pet-heart" style="left:20%; animation-delay: 0s;">💖</div>
+    <div class="pet-heart" style="left:75%; animation-delay: 0.7s;">💖</div>
+
+    <svg class="oyster-svg" viewBox="0 0 450 380" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="shellTopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#bae6fd"/>
+                <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+            <linearGradient id="shellBottomGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0284c7"/>
+                <stop offset="100%" stop-color="#0369a1"/>
+            </linearGradient>
+            <linearGradient id="innerMouthGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#1e3a8a"/>
+                <stop offset="100%" stop-color="#0f172a"/>
+            </linearGradient>
+            <linearGradient id="oysterBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#93c5fd"/>
+                <stop offset="100%" stop-color="#60a5fa"/>
+            </linearGradient>
+        </defs>
+
+        <path id="shell-bottom" 
+              d="M 30,230 C 20,330 90,360 225,360 C 360,360 430,330 420,230 C 370,250 310,230 225,240 C 140,230 80,250 30,230 Z" 
+              fill="url(#shellBottomGrad)" stroke="#0369a1" stroke-width="4" stroke-linejoin="round"/>
+
+        <path d="M 46,242 C 70,290 140,315 225,315 C 310,315 380,290 404,242 C 340,255 280,245 225,245 C 170,245 110,255 46,242 Z" 
+              fill="url(#innerMouthGrad)"/>
+
+        <path id="oyster-body" 
+              d="M 140,270 C 140,210 200,200 235,200 C 270,200 320,220 310,275 C 290,305 250,315 225,315 C 190,315 140,300 140,270 Z" 
+              fill="url(#oysterBodyGrad)" stroke="#1d4ed8" stroke-width="3"/>
+        <path d="M 225,202 Q 220,240 245,265" fill="none" stroke="#1d4ed8" stroke-width="3" opacity="0.6"/>
+
+        <g id="shell-top-group">
+            <path id="shell-top" 
+                  d="M 60,180 C 40,110 50,70 90,80 C 120,90 130,130 190,120 C 260,110 280,130 350,150 C 410,170 430,210 410,235 C 330,215 260,225 190,205 C 120,225 90,215 60,180 Z" 
+                  fill="url(#shellTopGrad)" stroke="#0369a1" stroke-width="4" stroke-linejoin="round"/>
+            <path id="shell-lines" d="M 90,80 Q 120,170 140,210 M 150,125 Q 180,170 200,205 M 225,120 Q 240,170 260,212 M 295,135 Q 310,180 330,218 M 350,150 Q 370,190 395,225" 
+                  fill="none" stroke="#0284c7" stroke-width="3.5" stroke-linecap="round" opacity="0.4"/>
+        </g>
+
+        <g id="eyes-group">
+            <g class="eye-set happy lovey">
+                <path d="M 255,90 Q 275,70 295,85" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                <path d="M 315,90 Q 335,72 355,92" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                <ellipse cx="280" cy="130" rx="22" ry="25" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                <ellipse cx="328" cy="138" rx="24" ry="26" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                <circle cx="284" cy="130" r="10" fill="#0f172a"/> <circle cx="282" cy="126" r="3" fill="#fff"/>
+                <circle cx="324" cy="138" r="10" fill="#0f172a"/> <circle cx="322" cy="134" r="3" fill="#fff"/>
+            </g>
+
+            <g class="eye-set scared acid">
+                <path d="M 258,102 Q 278,112 298,102" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                <path d="M 312,105 Q 332,115 352,102" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                <ellipse cx="280" cy="134" rx="22" ry="21" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                <ellipse cx="328" cy="140" rx="24" ry="22" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                <circle cx="276" cy="136" r="7" fill="#0f172a"/>
+                <circle cx="322" cy="142" r="7" fill="#0f172a"/>
+            </g>
+
+            <g class="eye-set insomnia toxic stormy crowded">
+                <path d="M 255,80 Q 275,65 295,80" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                <path d="M 315,82 Q 335,68 355,85" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                <ellipse cx="280" cy="128" rx="23" ry="26" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                <ellipse cx="328" cy="135" rx="25" ry="27" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                <circle cx="280" cy="128" r="12" fill="#0f172a"/> <circle cx="282" cy="124" r="3" fill="#fff"/>
+                <circle cx="326" cy="135" r="12" fill="#0f172a"/> <circle cx="328" cy="131" r="3" fill="#fff"/>
+            </g>
+
+            <g class="eye-set choking alkaline">
+                <path d="M 258,95 L 292,105" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                <path d="M 318,105 L 352,95" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                <ellipse cx="280" cy="132" rx="21" ry="21" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                <ellipse cx="328" cy="138" rx="23" ry="23" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                <path d="M 268,122 L 292,142 M 268,142 L 292,122" stroke="#0f172a" stroke-width="4.5" stroke-linecap="round"/>
+                <path d="M 316,126 L 340,146 M 316,146 L 340,126" stroke="#0f172a" stroke-width="4.5" stroke-linecap="round"/>
+            </g>
+
+            <g class="eye-set hibernating">
+                <path d="M 255,95 Q 275,85 295,98" fill="none" stroke="#451a03" stroke-width="4" stroke-linecap="round"/>
+                <path d="M 315,98 Q 335,88 355,100" fill="none" stroke="#451a03" stroke-width="4" stroke-linecap="round"/>
+                <path d="M 262,132 Q 280,148 298,132" fill="none" stroke="#0f172a" stroke-width="5" stroke-linecap="round"/>
+                <path d="M 312,140 Q 328,155 346,140" fill="none" stroke="#0f172a" stroke-width="5" stroke-linecap="round"/>
+            </g>
+
+            <g class="eye-set hungry">
+                <path d="M 255,95 Q 275,100 295,90" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                <path d="M 315,90 Q 335,102 355,95" fill="none" stroke="#451a03" stroke-width="5" stroke-linecap="round"/>
+                <ellipse cx="280" cy="130" rx="22" ry="25" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                <ellipse cx="328" cy="138" rx="24" ry="26" fill="#fff" stroke="#0369a1" stroke-width="3"/>
+                <ellipse cx="280" cy="134" rx="6" ry="11" fill="#0f172a"/>
+                <ellipse cx="328" cy="142" rx="6" ry="11" fill="#0f172a"/>
+            </g>
+        </g>
+
+        <g id="mouth-group">
+            <path class="mouth mouth-happy mouth-lovey" d="M 360,210 Q 400,240 370,260" fill="none" stroke="#451a03" stroke-width="4" stroke-linecap="round"/>
+            <path class="mouth mouth-scared mouth-acid" d="M 50,250 Q 80,225 110,245" fill="none" stroke="#0f172a" stroke-width="4" stroke-linecap="round"/>
+            <ellipse class="mouth mouth-choking mouth-alkaline" cx="225" cy="245" rx="14" ry="8" fill="#ef4444" stroke="#0f172a" stroke-width="2"/>
+            <path class="mouth mouth-insomnia mouth-hibernating mouth-toxic mouth-stormy mouth-crowded mouth-hungry" d="M 70,248 L 120,246" stroke="#0f172a" stroke-width="4" stroke-linecap="round"/>
+        </g>
+    </svg>
+</div>
+
+                <div id="display-badge" class="pet-status-badge badge-happy">กำลังประเมิน...</div>
+                <p id="display-narrative" class="display-story">เชื่อมต่อข้อมูลฟาร์มหอยนางรมระบบอัจฉริยะ</p>
+
+                <div class="mood-details-panel">
+                    <div class="detail-item-row alert-danger-zone">
+                        <span class="detail-label"><i class="fa-solid fa-circle-exclamation"></i> สาเหตุที่เกิดขึ้น:</span>
+                        <div id="display-cause" class="detail-value">กำลังวิเคราะห์สาเหตุเชิงลึก...</div>
+                    </div>
+                    <div class="detail-item-row alert-success-zone">
+                        <span class="detail-label"><i class="fa-solid fa-hand-holding-medical"></i> แนวทางการแก้ไขแนวทางระบบ:</span>
+                        <div id="display-solution" class="detail-value">กำลังประมวลผลวิธีแก้ไขที่เหมาะสม...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="pet.js"></script>
+</body>
+</html>

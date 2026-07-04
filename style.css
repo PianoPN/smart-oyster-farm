@@ -1,0 +1,1144 @@
+body {
+
+    font-family: 'Segoe UI', sans-serif;
+
+    background-color: #f5fbff;
+
+    color: rgb(255, 255, 255);
+
+    margin: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    overflow-x: hidden;
+
+}
+
+
+
+nav {
+    width: 100%;
+    background: rgb(255, 255, 255);
+    padding: 0; /* 🛠️ ปรับเป็น 0 เพื่อให้เนื้อหาด้านในขยายไปติดขอบซ้าย-ขวา ได้สุดหน้าจอ */
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(74, 222, 128, 0.3);
+    backdrop-filter: blur(10px);
+    position: sticky; /* ช่วยล็อกให้บาร์ติดอยู่บนสุดเวลาเลื่อนหน้าจอ */
+    top: 0;
+    z-index: 1100;
+}
+/* ── 2. ตัวจัดการกรอบด้านใน (ดันปุ่มไปซ้ายสุด) ── */
+.navbar-inner {
+    width: 100%;
+    max-width: 100%; /* 🛠️ เปลี่ยนจาก none เป็น 100% เพื่อบังคับให้กล่องแผ่เต็มความกว้างหน้าจอ */
+    padding: 12px 24px; /* เว้นระยะห่างจากขอบจอซ้าย-ขวาพอดีๆ ไม่ให้ปุ่มติดขอบพิกเซลหน้าจอเกินไป */
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    box-sizing: border-box;
+}
+/* ==========================================
+   📍 Layout 2 คอลัมน์: เนื้อหาหลัก + กล่องแจ้งเตือนข้างขวา
+   ========================================== */
+.page-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto 40px 8%;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+/* เอา margin/width เดิมของ weather-bar และ dashboard-content-layout ออก
+   เพราะตอนนี้ตำแหน่งถูกควบคุมโดย .page-layout / .main-content แทน */
+.main-content .weather-bar {
+    margin: 0 !important;
+    width: 860px;
+}
+
+.main-content .dashboard-content-layout {
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+}
+/* 1. ปรับแถบฝั่งขวาให้ขยายตัวเต็มพื้นที่ที่เหลือ */
+/* 1. ปรับแผงฝั่งขวา (.side-panel) ให้ขยายร่างรับพื้นที่ที่เหลือแนวนอนทั้งหมด */
+/* 1. แผงฝั่งขวา: สั่งให้ขยายรับพื้นที่แนวนอนที่เหลือทั้งหมด */
+.side-panel {
+    flex: 1;                 /* ขยายตัวกินพื้นที่ว่างในแนวนอนที่เหลือฝั่งขวา */
+    align-self: flex-start;  /* 🛠️ เปลี่ยนจาก stretch เป็น flex-start เพื่อไม่ให้กล่องยืดยาวดิ่งลงไปข้างล่าง */
+    position: sticky;
+    top: 90px;
+    box-sizing: border-box;
+    width: 100%;             /* มั่นใจว่าแผงยืดเต็มพื้นที่ */
+}
+
+/* 2. ตัวกล่องการ์ดแจ้งเตือน: เปลี่ยนทรงเป็นสี่เหลี่ยมผืนผ้าใบใหญ่ขึ้น */
+.alert-box {
+background: #FFFFFF;
+    border: 2px solid #E6F2FA;
+    border-radius: 25px;
+    padding: 24px;           
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    box-sizing: border-box;
+    width: 300%;             
+    min-height: 250px;       /* 🛠️ เพิ่มจุดนี้: กำหนดความสูงขั้นต่ำในแนวตั้ง (ลองปรับเพิ่ม-ลดตัวเลข px ได้ตามใจชอบเลยครับ) */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 3. รายการแจ้งเตือนด้านในกล่อง */
+.mini-notify-list {
+    display: flex;
+    flex-direction: column;
+    /* เอา flex: 1 ออก เพื่อให้กล่องหดตามเนื้อหาจริง ไม่ฝืนยืดลงล่าง */
+}
+.alert-box-header {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #0d4690;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #E6F2FA;
+}
+
+.alert-empty {
+    text-align: center;
+    color: #9ca3af;
+    padding: 25px 0;
+    font-size: 0.9rem;
+}
+
+.alert-view-all {
+    display: block;
+    text-align: right;
+    margin-top: 12px;
+    color: #3182ce;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.alert-view-all:hover {
+    text-decoration: underline;
+}
+
+/* รายการแจ้งเตือนแบบย่อในกล่องข้างขวา */
+
+
+.mini-notify-item {
+    background: #ffffff;
+    border-left: 6px solid #4ade80;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+}
+
+.mini-notify-item.danger {
+    border-left-color: #ef4444;
+    background: #fef2f2;
+}
+
+.mini-notify-item.warning {
+    border-left-color: #f59e0b;
+    background: #fffbeb;
+}
+
+.mini-notify-item.success {
+    border-left-color: #22c55e;
+    background: #f0fdf4;
+}
+
+.mini-notify-time {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #6b7280;
+}
+
+.mini-notify-msg {
+    font-size: 0.85rem;
+    color: #333;
+    line-height: 1.4;
+}
+
+/* เผื่อใช้กับหน้า notify.html ด้วย ให้สีเขียว (กลับมาปกติ) เข้าธีมเดียวกัน */
+.notify-item.success {
+    border-left-color: #22c55e;
+    background: #f0fdf4;
+}
+
+/* จอเล็ก: ยุบกล่องแจ้งเตือนลงมาด้านล่างแทนการอยู่ข้างขวา */
+@media (max-width: 1100px) {
+    .page-layout {
+        flex-direction: column;
+        margin: 20px auto;
+    }
+    .side-panel {
+        position: static;
+        width: 200%;
+        max-width: none;
+    }
+}
+.nav-right {
+    display: flex;
+    gap: 20px;
+    margin-left: auto; /* 🚀 ดันไอคอนแจ้งเตือนและกล่องนี้ไปต่อคิวที่ขวาสุดของหน้าจอทันที */
+    align-items: center;
+}
+
+/* ── 3. ดีไซน์ปุ่มแคปซูล Home สีฟ้ามินิมอล ── */
+.home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* เว้นระยะห่างระหว่างไอคอนกับข้อความ */
+    text-decoration: none; /* ลบเส้นใต้ลิงก์ออก */
+    color: #3182ce; /* ตัวอักษรสีฟ้า */
+    font-size: 0.9rem;
+    font-weight: 600;
+    background-color: #ebf8ff; /* พื้นหลังสีฟ้าอ่อนนุ่มนวล */
+    padding: 6px 16px;
+    border-radius: 20px; /* ปรับขอบให้โค้งมนเป็นทรงแคปซูล */
+    border: 1px solid #bee3f8; /* เส้นขอบฟ้าสว่าง */
+    cursor: pointer;
+}
+
+/* ── 4. เอฟเฟกต์ตอนเอาเมาส์ไปชี้ (Hover) ── */
+.home-btn:hover {
+    background-color: #3182ce; /* สลับเป็นพื้นหลังสีฟ้าเข้ม */
+    color: #FFFFFF; /* สลับเป็นตัวอักษรสีขาว */
+    transform: translateY(-1px); /* ลอยขึ้นเล็กน้อยเพิ่มมิติ */
+}
+
+
+.nav-left a {
+
+    color: #3078b6;
+
+    text-decoration: none;
+
+    margin-right: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+
+}
+
+nav a:hover {
+    color: #4ade80; /* สีเขียวเรืองแสงเวลา Hover */
+}
+
+
+
+.nav-item {
+    position: relative;
+    cursor: pointer;
+    font-size: 1.2rem;          /* ลดขนาดอิโมจิลงนิดให้ดูพอดี ไม่เทอะทะ */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;         /* ทำเป็นปุ่มวงกลม minimal เหมือนปุ่ม home-btn */
+    background-color: hsl(204, 46%, 42%); /* พื้นหลังอ่อนกลืนกับธีม */
+    transition: 0.2s ease;
+}
+
+.nav-item:hover {
+    background-color: #2d6489; /* เข้มขึ้นนิดเดียวตอนเอาเมาส์ชี้ */
+}
+/* ── Effect ฟองอากาศลอยกระจายเบาๆ ด้านหลัง ── */
+.bubble-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+.bubble {
+    position: absolute;
+    bottom: -20px;
+    background: rgba(174, 226, 255, 0.3);
+    border-radius: 50%;
+    animation: floatUp 8s infinite linear;
+}
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-105vh) scale(1.2); opacity: 0; }
+}
+
+/* ── ปุ่มสไตล์โฮมแคปซูลมินิมอล ── */
+.home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #3182ce;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background-color: #ebf8ff;
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid #bee3f8;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.home-btn:hover {
+    background-color: #3182ce;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+}
+.notify-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #ef4444;       /* แดงนุ่มลง ไม่จัดจ้านเท่าสี red ล้วน */
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 600;
+    min-width: 16px;
+    height: 16px;
+    line-height: 16px;
+    padding: 0;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0 0 0 2px #ffffff; /* เส้นขอบขาวบางๆ ให้ตัวเลขลอยแยกจากวงกลมพื้นหลัง ดูสะอาดขึ้น */
+}
+
+/* ==========================================================================
+   📦 ปรับปรุงกล่องคุณภาพน้ำโดยรวม (ให้กว้างเท่ากล่องแจ้งเตือน และสมดุลมินิมอล)
+   ========================================================================= */
+
+.water-quality-box {
+    background: #FFFFFF;
+    border: 2px solid #E6F2FA;
+    border-radius: 25px;
+    padding: 24px;           
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    box-sizing: border-box;
+    width: 300%;             
+    min-height: 250px;       /* 🛠️ เพิ่มจุดนี้: กำหนดความสูงขั้นต่ำในแนวตั้ง (ลองปรับเพิ่ม-ลดตัวเลข px ได้ตามใจชอบเลยครับ) */
+    display: flex;
+    flex-direction: column;   /* เว้นระยะห่างก่อนถึงกล่องการแจ้งเตือน */
+}
+
+/* หัวข้อกล่องคุณภาพน้ำ (ลดขนาดตัวหนังสือลงมาให้มินิมอลเข้าธีมเว็บ) */
+.water-quality-header {
+    font-size: 1.15rem;               /* ปรับให้ขนาดพอๆ กับหัวข้อแจ้งเตือนระบบ */
+    font-weight: bold;
+    color: #0d4690;                   /* สีน้ำเงินธีมหลักของฟาร์ม */
+    padding-bottom: 10px;
+    border-bottom: 2px solid #E6F2FA; /* เส้นคั่นใต้หัวข้อ */
+}
+
+/* ส่วนเนื้อหาภายในกล่อง จัดวางให้อยู่ตรงกลางอย่างสวยงาม */
+.water-quality-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;                         /* ระยะห่างช่องไฟระหว่างไอคอนและข้อความ */
+    padding: 15px 0 5px 0;
+}
+
+/* ขนาดอิโมจิแสดงอารมณ์เซนเซอร์ (ปรับให้สมส่วน ไม่ใหญ่ล้นจอ) */
+.status-icon-emoji {
+    font-size: 3.5rem;                /* ขนาดกำลังน่ารักเด่นชัดพอดีกล่อง */
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+/* ตัวหนังสือบอกสถานะหลัก (เช่น เหมาะสม, ไม่เหมาะสม) */
+.status-text-lbl {
+    font-size: 1.35rem;               /* ตัวหนา เด่นชัดเจน */
+    font-weight: bold;
+}
+
+/* ข้อความคำแนะนำภาษาไทยย่อยๆ ด้านล่าง */
+.status-advice-lbl {
+    font-size: 0.95rem;               /* ขนาดอ่านง่าย สบายตา */
+    color: #555555;
+    line-height: 1.4;
+    margin: 0;
+    font-weight: 500;
+}
+
+h1 {
+
+    margin-top: 80px;
+
+    color: #0d4690;
+
+    text-shadow: 0 0 20px rgba(67, 120, 236, 0.5);
+
+}
+h2 {
+
+    margin-top: 40px;
+
+    color: #04ab4f;
+
+    text-shadow: 0 0 15px rgba(3, 197, 74, 0.5);
+
+}
+
+
+/* 📍 คอนเทนเนอร์หลัก: ปรับระยะเยื้องซ้าย-ขวา ทั้งหมดตรงนี้ */
+.dashboard-content-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto 0 8%; /* 8% ตัวท้ายคือการดันเนื้อหาทั้งหมดเยื้องมาทางซ้าย ปรับเพิ่ม-ลดตรงนี้ได้เลยครับ */
+}
+
+/* กรอบขาวใบใหญ่ที่รวมทุกเซนเซอร์ */
+.sensor-mega-card {
+   background: #FFFFFF;       /* พื้นหลังขาวสะอาด */
+    border: 2px solid #E6F2FA;  /* เปลี่ยนขอบจากเขียวเป็นฟ้าอ่อนคุมโทน */
+    border-radius: 25px;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* กระจายเซนเซอร์ให้ห่างเท่ากันในกล่อง */
+    width: 860px; /* ล็อคความกว้างให้ยาวพอดีกับแถวปุ่ม 3 ปุ่มด้านล่าง เพื่อความขนานกัน */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+/* แต่ละคอลัมน์เซนเซอร์ข้างในกล่องใหญ่ */
+.sensor-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
+/* เส้นคั่นแนวตั้งระหว่างเซนเซอร์ให้ดูเป็นสัดส่วน */
+.sensor-divider {
+    width: 1px;
+    height: 100px;
+    background-color: #E6F2FA; /* ใช้สีฟ้าอ่อนทำเป็นเส้นคั่นแทนสีเทาเดิม */
+    margin: 0 20px;
+}
+
+/* ปรับขนาดไอคอนในกล่องใหญ่ให้กระชับขึ้น */
+.sensor-icon-small {
+    width: 50px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.sensor-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #8B5A2B;            /* ตัวเลขค่าเซนเซอร์เปลี่ยนเป็นสีน้ำตาลทอง/น้ำตาลหลัก */
+}
+.sensor-title {
+
+    font-size: 2rem;
+
+    font-weight: bold;
+
+   color: #7A5C49;            /* ชื่อหัวข้อ (อุณหภูมิ, pH) เป็นสีน้ำตาลอ่อนนุ่มตา */
+
+    margin-bottom: 10px;
+
+}
+/* 📍 กลุ่มปุ่มฟังก์ชันด้านล่าง ล็อคแถวละ 3 ชิดซ้าย */
+.function-group-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 220px); /* ล็อคขนาดให้ปุ่มกว้าง 220px เรียงกัน 3 อันจะกว้างราวๆ 680-700px */
+    gap: 20px;
+    justify-content: flex-start; /* บังคับให้ชิดซ้าย */
+}
+
+/* ปุ่มฟังก์ชันเดี่ยวๆ (ดึงความสูง-ต่ำและเอฟเฟกต์ของการ์ดเดิมมาใช้) */
+.menu-card {
+   background: #FFFFFF;
+    border: 2px solid #E6F2FA;
+    color: #4C2E1A;            /* ตัวหนังสือบนปุ่มเป็นสีน้ำตาลเข้ม */
+    border-radius: 20px;
+    height: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.menu-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    background-color: #FFBFAB; /* เปลี่ยนพื้นหลังเป็นสีส้มพีชพาสเทลตอนชี้ */
+    border-color: #FFBFAB;
+    color: #FFFFFF;            /* ดันตัวอักษรเป็นสีขาวเพื่อให้เด่นขึ้น */
+}
+/* สไตล์การ์ดดึงของเดิมมาใช้ได้เลยครับ */
+.sensor-card {
+    background: #FFFFFF;
+    border: 2px solid #E6F2FA;
+    border-radius: 40px;
+    width: 400px;       /* บังคับขนาดการ์ดให้เท่ากันทุกใบทั้งบนและล่าง */
+    height: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.sensor-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+
+/* และเช็กตรงส่วนนี้ด้วยเพื่อให้รูปอยู่ตรงกลาง */
+
+.sensor-icon {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    height: 100px;       /* กำหนดความสูงของพื้นที่วางรูป */
+
+    overflow: hidden;    /* ถ้ารูปใหญ่เกินพื้นที่นี้ ให้ตัดส่วนเกินทิ้ง */
+
+}
+
+.sensor-value {
+
+    font-size: 2.2rem;
+
+    font-weight: bold;
+
+    color: #c07030;
+
+}
+
+.sensor-label {
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    color: #6e420f;
+
+}
+
+@keyframes float {
+
+    0%, 100% { transform: translateY(0); }
+
+    50% { transform: translateY(-10px); }
+
+}
+
+
+
+/* Modal Styling */
+
+.modal {
+
+    display: none;
+
+    position: fixed;
+
+    top: 0; left: 0;
+
+    width: 100%; height: 100%;
+
+    background: rgba(0,0,0,0.8);
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 999;
+
+}
+
+
+
+.modal-content {
+
+    background: #051a0b;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    border: 2px solid #de804a;
+
+    text-align: center;
+
+}
+
+.status-label {
+
+    font-size: 0.9rem;
+
+    margin-top: 5px;
+
+    font-weight: bold;
+
+}
+
+/* ==========================================
+   📍 ส่วนแก้ไขสีแสดงสถานะของค่าเซนเซอร์
+   ========================================== */
+.status-normal { 
+    color: #22c55e !important; /* สีเขียวเข้มขึ้นเล็กน้อยเพื่อให้เห็นชัดบนพื้นหลังขาว */
+    font-weight: bold;
+} 
+
+.status-low { 
+    color: #f59e0b !important; /* สีส้ม/เหลือง แจ้งเตือนเมื่อค่าต่ำเกินไป หรือน้ำจืดไป */
+    font-weight: bold;
+}
+
+.status-high { 
+    color: #ef4444 !important; /* สีแดง แจ้งเตือนเมื่อค่าสูงเกินไป หรือเค็ม/ขุ่นไป */
+    font-weight: bold;
+}
+
+/* ป้องกันข้อความ Connecting ตัวเริ่มต้นกลืนหายไป */
+.sensor-status {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.control-panel {
+
+    background: rgba(255, 255, 255, 0.05);
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    margin-bottom: 20px;
+
+    width: 80%;
+
+    max-width: 900px;
+
+}
+
+
+
+.filter-group {
+
+    margin-bottom: 15px;
+
+    text-align: center;
+
+}
+
+
+
+.filter-group p {
+
+    margin-bottom: 8px;
+
+    font-size: 0.9rem;
+
+    color: #267e46;
+
+    opacity: 0.8;
+
+}
+
+
+
+.type-btn {
+
+    background: #ffffff;
+
+    border: 1px solid #4ade80;
+
+    color: #4ade80;
+
+    padding: 10px 15px;
+
+    margin: 5px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+}
+
+
+
+.type-btn:hover {
+
+   background: #f0fff4;    /* สีขาวอมเขียวอ่อนๆ เวลาชี้ */
+   box-shadow: 0 0 10px rgba(74, 222, 128, 0.2);
+
+}
+
+/* คอนเทนเนอร์หลักของกราฟ */
+
+.chart-container {
+
+    background-color: #ffffff; /* ภายในกรอบสีขาว */
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    margin: 20px auto;
+
+    width: 90%;
+
+    max-width: 1100px;
+
+    height: 550px; /* เพิ่มความสูงให้กราฟดูใหญ่ชัดเจน */
+
+    box-sizing: border-box;
+
+
+
+    /* กรอบเรืองแสงสีเขียว */
+
+    border: 2px solid #4ade80;
+
+    box-shadow: 0 0 25px rgba(74, 222, 128, 0.4);
+
+   
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+.control-panel {
+    position: relative;
+    z-index: 10; /* ดันแผงปุ่มให้อยู่เหนือเลเยอร์อื่น */
+}
+
+.type-btn {
+    pointer-events: auto; /* มั่นใจว่าปุ่มสามารถรับการคลิกได้ */
+}
+.control-panel {
+    position: relative;
+    z-index: 10; /* ให้ปุ่มอยู่เลเยอร์หน้าสุด */
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 900px;
+    display: block; /* มั่นใจว่าแสดงผล */
+}
+
+.notification-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.notify-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-clear {
+    background: #ffffff;
+    border: 2px solid #4ade80;
+    color: #2e7d32;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-clear:hover {
+    background: #4ade80;
+    color: white;
+}
+
+/* แถบแจ้งเตือนแนวนอนยาว */
+.notify-item {
+    background: #ffffff;
+    border-left: 10px solid #4ade80; /* สีเริ่มต้น */
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    width: 100%;
+}
+
+.notify-item.danger { border-left-color: #ef4444; background: #fef2f2; }
+.notify-item.warning { border-left-color: #f59e0b; background: #fffbeb; }
+
+.notify-time { font-weight: bold; color: #666; min-width: 180px; }
+.notify-msg { color: #333; flex-grow: 1; }
+
+.notify-item {
+    background: #ffffff;
+    border-left: 10px solid #4ade80;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.notify-item.warning {
+    border-left-color: #f59e0b; /* สีส้มสำหรับคำเตือน AI */
+    background: #fffbeb;
+}
+
+.notify-item.danger {
+    border-left-color: #ef4444; /* สีแดงสำหรับค่าวิกฤต */
+    background: #fef2f2;
+}
+
+.notify-time {
+    color: #6b7280;
+    font-weight: bold;
+    min-width: 170px;
+}
+/* แถบพยากรณ์อากาศรวม */
+.weather-bar {
+    background-color: #FFFFFF; /* พื้นหลังกล่องเป็นสีขาว */
+    border: 2px solid #E6F2FA;  /* เส้นขอบเป็นสีฟ้าอ่อนนุ่มนวล */
+    border-radius: 25px;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px auto 0 8%;    /* ดันชิดซ้ายเท่ากับกล่องล่าง */
+    width: 860px; /* ล็อคความกว้างให้ยาวพอดีกับแถวปุ่ม 3 ปุ่มด้านล่าง เพื่อความขนานกัน */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    display: flex;
+    flex-direction: column;    /* จัดให้บรรทัดบนกับบรรทัดล่างแยกกัน */
+    gap: 15px;                 /* ระยะห่างระหว่างบรรทัดที่ 1 และบรรทัดที่ 2 */
+}
+
+.weather-row {
+    display: flex;
+    align-items: center;       /* จัดให้ไอคอนและตัวอักษรอยู่กึ่งกลางแนวดิ่งเท่ากัน */
+}
+
+/* บรรทัดล่าง: สั่งให้รูปสภาพอากาศกับข้อความพยากรณ์เรียงต่อกันแนวนอน */
+.row-bottom {
+    display: flex;
+    flex-direction: row;       
+    align-items: center;
+    gap: 10px;                 /* ระยะห่างระหว่างรูปก้อนเมฆกับตัวหนังสือ */
+}
+
+/* 📐 ปรับขนาดหมุดปักและชื่อเมืองให้ใหญ่เด่นขึ้นตามต้องการ */
+.weather-pin {
+    width: 45px;               /* ขยายรูปหมุดให้ใหญ่เต็มตา */
+    height: auto;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+#weather-city {
+    font-size: 2.3rem;         /* ขยายชื่อเมืองให้ใหญ่ขึ้น */
+    font-weight: bold;
+   color: #4C2E1A;
+    display: flex;
+    align-items: center;
+}
+
+#weather-temp {
+    font-size: 2.3rem;           /* ขยายตัวเลขอุณหภูมิให้ใหญ่สะใจคู่กันไป */
+    font-weight: bold;
+    margin-left: 20px;
+   color: #4C2E1A;      /* เว้นระยะห่างจากชื่อเมือง */
+}
+
+/* 📐 ปรับขนาดรูปสภาพอากาศ (ก้อนเมฆ/ฝน) บรรทัดล่าง */
+#weather-icon {
+    width: 150px;               /* ปรับขนาดก้อนเมฆให้พอดี ไม่ใหญ่จนบังตัวหนังสือ */
+    height: auto;
+}
+
+/* ข้อความพยากรณ์ยาวๆ บรรทัดล่าง */
+#weather-forecast-text {
+    font-size: 2rem;
+    color: #7A5C49;
+    line-height: 1.5;
+}
+/* คอนเทนเนอร์หลักจัดแบบแนวตั้ง */
+.dashboard-grid {
+    display: flex;
+    flex-direction: column; 
+    gap: 25px; /* ระยะห่างระหว่าง "แถวบน" กับ "แถวล่าง" */
+    align-items: center;
+    margin-top: 30px;
+}
+
+/* แถวแต่ละแถวจัดแบบแนวนอน */
+.sensor-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* ระยะห่างระหว่าง "การ์ด" ในแถวเดียวกัน */
+    width: 100%;
+}
+
+/* ใช้สไตล์การ์ดเดิมเพื่อให้ขนาดเท่ากันเป๊ะ */
+.sensor-card {
+    background: white;
+    border: 2px solid #de7e4a;
+    border-radius: 20px;
+    width: 200px;  /* กำหนดความกว้างคงที่เพื่อให้ตรงกันทั้ง 2 แถว */
+    height: 220px; /* กำหนดความสูงคงที่ */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* เอฟเฟกต์ Hover เหมือนกันทุกใบ */
+.sensor-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.menu-label {
+
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #c77545;
+    text-align: center;  /* 📍 เพิ่มบรรทัดนี้: บังคับให้ตัวอักษรทุกบรรทัดจัดกึ่งกลางกล่อง */
+    width: 100%;         /* ขยายพื้นที่ข้อความให้เต็มความกว้างกล่องเพื่อความแม่นยำ */
+    padding: 0 10px;     /* แอบเว้นระยะช่องไฟซ้ายขวานิดหน่อยไม่ให้ตัวหนังสือชนขอบกล่อง */
+}
+/* ==========================================
+    📍 notify-style.css (สำหรับหน้า notify.html โดยเฉพาะ)
+   ========================================== */
+
+.notification-container {
+    width: 95%;
+    max-width: 1350px; /* ขยายกรอบทำงานหน้าให้กว้างขึ้นล้อกับ Dashboard */
+    margin: 30px auto;
+}
+
+/* แถบแจ้งเตือนแนวนอนยาว ปรับความกว้างและขนาดใหญ่ขึ้น 50% */
+.notify-item {
+    background: #ffffff;
+    border-left: 15px solid #4ade80; /* เพิ่มความหนาแถบสีข้าง 50% (จาก 10px เป็น 15px) */
+    border-radius: 18px;             /* ปรับความโค้งมนเพิ่มขึ้น */
+    padding: 30px;                   /* เพิ่ม Padding ด้านใน 50% (จาก 20px เป็น 30px) */
+    margin-bottom: 22px;             /* เพิ่มระยะห่างระหว่างการ์ด */
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+    width: 100%;                     /* กว้างยาวขยายเต็มพื้นที่กล่องแม่ */
+    box-sizing: border-box;
+}
+
+.notify-item.warning {
+    border-left-color: #f59e0b;
+    background: #fffbeb;
+}
+
+.notify-item.danger {
+    border-left-color: #ef4444;
+    background: #fef2f2;
+}
+
+/* ปรับขนาดตัวอักษรใหญ่ขึ้น 50% */
+.notify-time {
+    color: #6b7280;
+    font-weight: bold;
+    min-width: 255px;                /* ขยายขนาดความกว้างกล่องเวลาเผื่อไว้ (จาก 170px เป็น 255px) */
+    font-size: 1.4rem;               /* เพิ่มขนาดตัวอักษรเวลาขึ้น 50% */
+}
+
+.notify-msg {
+    color: #333;
+    flex-grow: 1;
+    font-size: 1.35rem;              /* เพิ่มขนาดข้อความแจ้งเตือนขึ้น 50% (อ่านง่าย ชัดเจนมาก) */
+    line-height: 1.5;
+}
+
+.loading-notify {
+    text-align: center;
+    color: #7A5C49;
+    font-size: 1.5rem;
+    padding: 50px 0;
+}
+/* ── สไตล์เพิ่มเติมสำหรับกล่อง AI Pet ในหน้าแดชบอร์ด ── */
+.air-pet-mini-box {
+    margin: 15px 0 15px 0; /* เว้นช่องไฟให้กล่อง AI Pet อยู่ตรงกลางอย่างพอดี */
+}
+
+/* จัดเลเอาต์ด้านในกล่อง AI Pet (ยึดตามหน้าฟังก์ชันเดิม) */
+.pet-avatar-display-set {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0 5px 0;
+}
+
+/* ขนาดของ SVG น้องหอย AI แบบย่อในกล่อง */
+.oyster-svg-mini {
+    width: 250px; /* ขนาดกำลังมินิมอล พอดีกล่อง */
+    height: auto;
+}
+
+/* ป้ายสถานะบอกอารมณ์ใต้ตัวหอย */
+.status-badge-lbl {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #4C2E1A;
+    background-color: #ebf8ff;
+    padding: 6px 16px;
+    border-radius: 99px;
+    border: 1px solid #bee3f8;
+}
+
+/* ── ควบคุมดวงตา (ซ่อนตาเครียดก่อน และคุมจุดหมุนฝาบน) ── */
+.eyes-scared {
+    display: none;
+}
+
+/* จุดหมุนของฝาบนให้อยู่ทางขวาโคนตา */
+#shell-top-group-mini {
+    transform-box: fill-box;
+    transform-origin: 80% 50%;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 😭 สภาพเครียด: สลับดวงตา/คิ้วเป็นเครียด และงุ้มฝาบนลงต่ำพร้อมริ้ว */
+.pet-avatar-display-set.scared .eyes-happy { display: none; }
+.pet-avatar-display-set.scared .eyes-scared { display: block; }
+.pet-avatar-display-set.scared #shell-top-group-mini { 
+    transform: translateY(22px) rotate(4deg); 
+}
+/* สลับสีป้ายสถานะเป็นเครียด */
+.pet-avatar-display-set.scared .status-badge-lbl {
+    color: #ef4444;
+    background-color: #fef2f2;
+    border-color: #fecaca;
+}
+/* ===================================================
+   🌊 GLOBAL AQUARIUM LAYER STYLES
+   =================================================== */
+.aquarium-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 40%, #7dd3fc 100%);
+    z-index: -4;
+}
+.light-rays {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.7) 0%, transparent 60%);
+    z-index: -3;
+    pointer-events: none;
+}
+.water-waves {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 180px;
+    z-index: -2; opacity: 0.6; pointer-events: none;
+    overflow: hidden;
+}
+.wave {
+    position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 70%);
+    border-radius: 43%;
+}
+.wave1 { animation: waveMove 12s infinite linear; }
+.wave2 { animation: waveMove 18s infinite linear; opacity: 0.5; top: 10px; }
+
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bubble-node {
+    position: absolute; bottom: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(56, 189, 248, 0.2) 60%, rgba(255, 255, 255, 0.8) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.6), 0 0 10px rgba(14, 165, 233, 0.2);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+}
+
+.fish-tank {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; overflow: hidden;
+}
+.fish-node {
+    position: absolute; width: 25px; height: 12px;
+    background: linear-gradient(90deg, rgba(2, 132, 199, 0.5), rgba(56, 189, 248, 0.2));
+    border-radius: 50% 80% 50% 50%;
+    box-shadow: 0 0 8px rgba(14, 165, 233, 0.3);
+    animation: swimRight linear infinite;
+}
+.fish-node::after {
+    content: ''; position: absolute; right: -6px; top: 2px;
+    border-left: 8px solid rgba(2, 132, 199, 0.5);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+
+@keyframes swimRight {
+    0% { left: -40px; transform: scaleY(1); }
+    50% { transform: scaleY(0.9) translateY(15px); }
+    100% { left: 105vw; transform: scaleY(1); }
+}

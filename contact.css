@@ -1,0 +1,554 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+
+/* กำหนดตัวแปรพาเลทสีที่ได้ปรับปรุงให้สวยงามตามภาพบรีฟ 100% */
+:root {
+    --bg-main: #F5FBFF;         /* สีพื้นหลังหลัก เพิ่มความสบายตา */
+    --bg-card: #FFFFFF;         /* สีพื้นหลังการ์ด/กล่อง ดูสะอาด โปร่ง */
+    --color-main: #8B5A2B;      /* สีหลัก (หัวข้อ/ตัวเลข) น้ำตาลเข้ม อบอุ่น เป็นธรรมชาติ */
+    --color-secondary: #87CEEB; /* สีรอง (ไอคอน/กราฟิก) ฟ้าอ่อน สื่อถึงน้ำและความสดชื่น */
+    --color-accent: #FFBFAB;    /* สีเน้น (ปุ่ม/ไฮไลท์) พีช/ส้มอ่อน อ่อนโยน น่าใช้ */
+    --text-primary: #4C2E1A;    /* ตัวอักษรหลัก น้ำตาลเข้ม คอนทราสต์ดี อ่านง่าย */
+    --text-sub: #7A5C49;        /* ตัวอักษรรอง/รายละเอียด น้ำตาลอ่อน นุ่มนวล ไม่แย่งสายตา */
+    --border-light: #E6F2FA;    /* เส้นขอบ/พื้นหลังอ่อน ฟ้าอ่อนมาก คุมโทน กลมกลืน */
+    --shadow-soft: 0 10px 25px rgba(139, 90, 43, 0.04);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Sarabun', sans-serif;
+    transition: all 0.2s ease-in-out;
+}
+/* ===================================================
+   🌊 GLOBAL AQUARIUM LAYER STYLES
+   =================================================== */
+.aquarium-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 40%, #7dd3fc 100%);
+    z-index: -4;
+}
+.light-rays {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.7) 0%, transparent 60%);
+    z-index: -3;
+    pointer-events: none;
+}
+.water-waves {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 180px;
+    z-index: -2; opacity: 0.6; pointer-events: none;
+    overflow: hidden;
+}
+.wave {
+    position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 70%);
+    border-radius: 43%;
+}
+.wave1 { animation: waveMove 12s infinite linear; }
+.wave2 { animation: waveMove 18s infinite linear; opacity: 0.5; top: 10px; }
+
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bubble-node {
+    position: absolute; bottom: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(56, 189, 248, 0.2) 60%, rgba(255, 255, 255, 0.8) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.6), 0 0 10px rgba(14, 165, 233, 0.2);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+}
+
+.fish-tank {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; overflow: hidden;
+}
+.fish-node {
+    position: absolute; width: 25px; height: 12px;
+    background: linear-gradient(90deg, rgba(2, 132, 199, 0.5), rgba(56, 189, 248, 0.2));
+    border-radius: 50% 80% 50% 50%;
+    box-shadow: 0 0 8px rgba(14, 165, 233, 0.3);
+    animation: swimRight linear infinite;
+}
+.fish-node::after {
+    content: ''; position: absolute; right: -6px; top: 2px;
+    border-left: 8px solid rgba(2, 132, 199, 0.5);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+
+@keyframes swimRight {
+    0% { left: -40px; transform: scaleY(1); }
+    50% { transform: scaleY(0.9) translateY(15px); }
+    100% { left: 105vw; transform: scaleY(1); }
+}/* ===================================================
+   🌊 GLOBAL AQUARIUM LAYER STYLES
+   =================================================== */
+.aquarium-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 40%, #7dd3fc 100%);
+    z-index: -4;
+}
+.light-rays {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.7) 0%, transparent 60%);
+    z-index: -3;
+    pointer-events: none;
+}
+.water-waves {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 180px;
+    z-index: -2; opacity: 0.6; pointer-events: none;
+    overflow: hidden;
+}
+.wave {
+    position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 70%);
+    border-radius: 43%;
+}
+.wave1 { animation: waveMove 12s infinite linear; }
+.wave2 { animation: waveMove 18s infinite linear; opacity: 0.5; top: 10px; }
+
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bubble-node {
+    position: absolute; bottom: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, rgba(56, 189, 248, 0.2) 60%, rgba(255, 255, 255, 0.8) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.6), 0 0 10px rgba(14, 165, 233, 0.2);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+}
+
+.fish-tank {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; overflow: hidden;
+}
+.fish-node {
+    position: absolute; width: 25px; height: 12px;
+    background: linear-gradient(90deg, rgba(2, 132, 199, 0.5), rgba(56, 189, 248, 0.2));
+    border-radius: 50% 80% 50% 50%;
+    box-shadow: 0 0 8px rgba(14, 165, 233, 0.3);
+    animation: swimRight linear infinite;
+}
+.fish-node::after {
+    content: ''; position: absolute; right: -6px; top: 2px;
+    border-left: 8px solid rgba(2, 132, 199, 0.5);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+
+@keyframes swimRight {
+    0% { left: -40px; transform: scaleY(1); }
+    50% { transform: scaleY(0.9) translateY(15px); }
+    100% { left: 105vw; transform: scaleY(1); }
+}
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ── แถบบาร์สีขาวบนสุด (Top Navbar) ── */
+nav {
+    width: 100%;
+    background-color: #FFFFFF; /* พื้นหลังสีขาวล้วนสะอาดตา */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid #E6F2FA;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+}
+
+/* ตัวจัดการกรอบด้านใน ดันปุ่มไปซ้ายสุด */
+.navbar-inner {
+    width: 100%;
+    max-width: none; /* ขนาดกว้างเท่ากับหน้าคอนเทนเนอร์หลัก */
+    padding: 12px 20px;
+    display: flex;
+    justify-content: flex-start; /* 👈 บังคับให้ปุ่มและเนื้อหาเริ่มจากซ้ายสุด */
+    align-items: center;
+}
+
+/* ดีไซน์ปุ่มแคปซูล Home สไตล์มินิมอลตามรูปภาพล่าสุด */
+.home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* เว้นระยะห่างระหว่างไอคอนบ้านกับตัวอักษร */
+    text-decoration: none;
+    color: #3182ce; /* ข้อความสีฟ้า */
+    font-size: 0.9rem;
+    font-weight: 600;
+    background-color: #ebf8ff; /* พื้นหลังฟ้าอ่อนนุ่มนวล */
+    padding: 6px 16px;
+    border-radius: 20px; /* ทำมุมโค้งมนทรงแคปซูล */
+    border: 1px solid #bee3f8;
+    cursor: pointer;
+}
+
+/* เอฟเฟกต์เมื่อเอาเมาส์ไปชี้ */
+.home-btn:hover {
+    background-color: #3182ce;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+}
+/* ── คอนเทนเนอร์หลัก (ปรับลด padding ล่างเพราะลบเมนูออกแล้ว) ── */
+.app-container {
+    width: 100%;
+    max-width: 760px;
+    padding: 25px 20px 40px 20px; 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 2. ส่วนหัวต้อนรับสไตล์พรีเมียมจาก Dashboard */
+.welcome-card {
+   color: #3078b6;
+
+    text-decoration: none;
+
+    margin-right: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+
+}
+
+.welcome-text {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #2b6cb0;
+    background-color: #ebf8ff;
+    padding: 3px 12px;
+    border-radius: 20px;
+}
+
+.location-badge {
+    color: #e53e3e;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.page-title {
+    font-size: 1.35rem;
+    color: var(--color-main);
+    margin: 8px 0 5px 0;
+    font-weight: 700;
+}
+
+.page-desc {
+    font-size: 0.88rem;
+    color: var(--text-sub);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* 3. กล่อง Feed ของรายการหน่วยงาน */
+.agencies-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.agency-card-item {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+}
+
+.card-trigger {
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--bg-card);
+    user-select: none;
+}
+
+.card-trigger:hover {
+    background-color: var(--bg-main);
+}
+
+.trigger-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-box {
+    width: 42px;
+    height: 42px;
+    background-color: var(--bg-main);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-secondary);
+    font-size: 1.15rem;
+    border: 1px solid var(--border-light);
+}
+
+.title-group h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--color-main);
+    font-weight: 600;
+}
+
+.tag-sub {
+    font-size: 0.78rem;
+    color: var(--text-sub);
+    display: block;
+    margin-top: 1px;
+}
+
+.arrow-toggle {
+    color: var(--text-sub);
+    font-size: 1rem;
+    transition: transform 0.25s ease;
+}
+
+/* 4. ส่วนเนื้อหารายละเอียดภายในกล่อง */
+.card-expandable-content {
+    display: none; 
+    border-top: 1px solid var(--border-light);
+    background-color: var(--bg-card);
+}
+
+.inner-padding {
+    padding: 20px;
+}
+
+.info-segment {
+    margin-bottom: 12px;
+}
+
+.segment-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-main);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.info-segment p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.text-highlight {
+    color: var(--color-main);
+    font-weight: 600;
+    background-color: var(--border-light);
+    padding: 1px 5px;
+    border-radius: 4px;
+}
+
+.meta-info-block {
+    background-color: var(--bg-main);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid var(--border-light);
+    margin-top: 15px;
+}
+
+.meta-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: var(--text-sub);
+}
+
+.meta-row i {
+    color: var(--color-secondary);
+    margin-top: 3px;
+    width: 16px;
+    text-align: center;
+}
+
+.meta-row a {
+    color: var(--color-main);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px dashed var(--color-main);
+}
+
+.meta-row a:hover {
+    color: var(--color-secondary);
+    border-bottom-color: var(--color-secondary);
+}
+
+.hotline-row {
+    background-color: var(--color-accent);
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: var(--text-primary);
+}
+
+.hotline-row i {
+    color: var(--color-main);
+}
+
+.phone-highlight {
+    font-size: 0.95rem;
+    color: var(--color-main);
+    font-weight: 700;
+}
+
+.nav-direct-link a {
+    background-color: #e6fffa;
+    color: #234e52;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #b2f5ea;
+    font-weight: 500;
+}
+
+.nested-highlight-box {
+    margin-top: 15px;
+    border-left: 3px solid var(--color-main);
+    padding-left: 12px;
+}
+
+.nested-highlight-box h4 {
+    margin: 0 0 6px 0;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+}
+
+.nested-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.84rem;
+    color: var(--text-sub);
+    margin: 5px 0;
+}
+
+.nested-row i {
+    font-size: 0.6rem;
+    margin-top: 5px;
+    color: var(--color-secondary);
+}
+
+.highlight-alert {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.mini-pill {
+    background-color: var(--color-accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--color-main);
+    margin-left: 4px;
+    display: inline-block;
+}
+
+/* 5. ส่วนปุ่มแอดมินรูปแคปซูลยาวด้านล่าง */
+.admin-footer-area {
+    margin-top: 10px;
+}
+
+.capsule-admin-btn {
+    background-color: var(--color-accent);
+    color: var(--text-primary);
+    border: 2px solid var(--color-main);
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 20px rgba(255, 191, 171, 0.35);
+}
+
+.capsule-admin-btn:hover {
+    background-color: var(--color-main);
+    color: var(--bg-card);
+    transform: translateY(-2px);
+}
+
+/* สถานะเมื่อการ์ดถูกเปิดใช้งาน */
+.card-active-state {
+    border-color: var(--color-secondary);
+    box-shadow: 0 8px 20px rgba(135, 206, 235, 0.08);
+}
+
+.card-active-state .arrow-toggle {
+    transform: rotate(180deg);
+    color: var(--color-main);
+}
+
+@media (max-width: 600px) {
+    .welcome-user {
+        position: static;
+        display: inline-block;
+        margin-bottom: 8px;
+    }
+    .welcome-card {
+        padding: 20px 15px;
+    }
+}

@@ -1,0 +1,362 @@
+/* พื้นหลังปรับเป็นสีฟ้าอ่อนนุ่มนวล คุมโทนเดียวกับตัวฟาร์มหลัก */
+body.window-page {
+    background-color: #f5fbff;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* ── 1. แถบเนวิเกเตอร์ด้านบน ── */
+.window-page nav {
+    width: 100%;
+    background: rgb(255, 255, 255);
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(74, 222, 128, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* เว้นระยะห่างระหว่างไอคอนกับข้อความ */
+    text-decoration: none; /* ลบเส้นใต้ลิงก์ออก */
+    color: #3182ce; /* ตัวอักษรสีฟ้า */
+    font-size: 0.9rem;
+    font-weight: 600;
+    background-color: #ebf8ff; /* พื้นหลังสีฟ้าอ่อนนุ่มนวล */
+    padding: 6px 16px;
+    border-radius: 20px; /* ปรับขอบให้โค้งมนเป็นทรงแคปซูล */
+    border: 1px solid #bee3f8; /* เส้นขอบฟ้าสว่าง */
+    cursor: pointer;
+}
+
+/* ── 4. เอฟเฟกต์ตอนเอาเมาส์ไปชี้ (Hover) ── */
+.home-btn:hover {
+    background-color: #3182ce; /* สลับเป็นพื้นหลังสีฟ้าเข้ม */
+    color: #FFFFFF; /* สลับเป็นตัวอักษรสีขาว */
+    transform: translateY(-1px); /* ลอยขึ้นเล็กน้อยเพิ่มมิติ */
+}
+/* ===================================================
+   🌊 LUXURY AQUARIUM & GLASSMORPHISM CORE STYLES (guide.css)
+   =================================================== */
+
+/* 🌌 Aquarium Background Layer */
+.aquarium-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #021526 0%, #032541 40%, #074173 100%);
+    z-index: -4;
+}
+
+/* ☀️ Sun Light Rays Effect */
+.light-rays {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(14, 165, 233, 0.25) 0%, transparent 60%);
+    z-index: -3;
+    pointer-events: none;
+}
+
+/* 🌊 Water Waves Top Overlay */
+.water-waves {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 180px;
+    z-index: -2; opacity: 0.4; pointer-events: none;
+    overflow: hidden;
+}
+.wave {
+    position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 70%);
+    border-radius: 43%;
+}
+.wave1 { animation: waveMove 12s infinite linear; }
+.wave2 { animation: waveMove 18s infinite linear; opacity: 0.5; top: 10px; }
+
+@keyframes waveMove {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 🫧 Bubble System Engine Container */
+.bubble-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bubble-node {
+    position: absolute; bottom: -60px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(14, 165, 233, 0.1) 60%, rgba(255, 255, 255, 0.6) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 8px rgba(255,255,255,0.5), 0 0 12px rgba(14, 165, 233, 0.3);
+    animation: bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+}
+
+/* 🐟 Floating Fish Simulation Container */
+.fish-tank {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none; overflow: hidden;
+}
+.fish-node {
+    position: absolute; width: 25px; height: 12px;
+    background: linear-gradient(90deg, rgba(14, 165, 233, 0.4), rgba(56, 189, 248, 0.1));
+    border-radius: 50% 80% 50% 50%;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+    animation: swimRight linear infinite;
+}
+.fish-node::after {
+    content: ''; position: absolute; right: -6px; top: 2px;
+    border-left: 8px solid rgba(14, 165, 233, 0.4);
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+
+@keyframes swimRight {
+    0% { left: -40px; transform: scaleY(1); }
+    50% { transform: scaleY(0.9) translateY(15px); }
+    100% { left: 105vw; transform: scaleY(1); }
+}
+
+/* 🎛️ Layout Workspace Container */
+.guide-container {
+    width: 92%; max-width: 1400px;
+    margin: 40px auto; padding-bottom: 60px;
+}
+.guide-header-title {
+    text-align: center; color: #ffffff;
+    font-size: 2.3rem; font-weight: 700;
+    text-shadow: 0 0 15px rgba(14, 165, 233, 0.6);
+    margin-bottom: 8px;
+}
+.guide-subtitle {
+    text-align: center; color: #94a3b8;
+    font-size: 1.1rem; margin-bottom: 45px;
+}
+
+/* 🛠️ Enterprise Multi-Column Grid (3 Columns) */
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* 💎 Premium Glassmorphism & Cyber Ocean Shadow Card */
+.guide-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 
+                inset 0 0 12px rgba(255, 255, 255, 0.02);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+/* 🌊 Ripple Hover & Glow Effect */
+.guide-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 15px 35px rgba(3, 105, 161, 0.5), 
+                0 0 20px rgba(56, 189, 248, 0.25),
+                inset 0 0 15px rgba(56, 189, 248, 0.1);
+}
+
+/* Card Interactive Header Header */
+.card-header {
+    padding: 24px; display: flex;
+    align-items: center; gap: 15px;
+    cursor: pointer; user-select: none;
+}
+.card-icon {
+    font-size: 1.5rem; background: rgba(14, 165, 233, 0.15);
+    padding: 10px; border-radius: 14px;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.2);
+    transition: transform 0.3s ease;
+}
+.guide-card:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+.card-title {
+    font-size: 1.1rem; font-weight: 600;
+    color: #f8fafc; margin: 0; flex-grow: 1;
+}
+.arrow-icon {
+    color: #94a3b8; font-size: 1rem;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 📐 Smooth Slide Content Transition Engine */
+.card-content-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-content {
+    overflow: hidden;
+}
+.card-content p {
+    margin: 0 24px 24px 24px; padding-top: 16px;
+    border-top: 1px dashed rgba(255,255,255,0.1);
+    color: #e2e8f0; font-size: 0.98rem; line-height: 1.6;
+}
+
+/* Active Open Card States */
+.guide-card.active {
+    background: rgba(15, 23, 42, 0.4);
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.2);
+}
+.guide-card.active .card-content-wrapper {
+    grid-template-rows: 1fr;
+}
+.guide-card.active .arrow-icon {
+    transform: rotate(180deg);
+    color: #38bdf8;
+}
+.guide-card.active .card-title {
+    color: #38bdf8;
+}
+
+/* 📱 Responsive Engineering Matrix */
+@media (max-width: 1150px) {
+    .guide-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .guide-header-title { font-size: 2rem; }
+}
+@media (max-width: 720px) {
+    .guide-grid { grid-template-columns: 1fr; gap: 15px; }
+    .guide-header-title { font-size: 1.7rem; }
+    .guide-container { margin: 20px auto; }
+}
+
+.navbar-inner {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: flex-start; /* ดันปุ่มโฮมชิดซ้ายสุดของจอ */
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* ── 2. ดีไซน์ปุ่มแคปซูล Home สีฟ้ามินิมอล (ยกมาจากหน้าหลัก) ── */
+.home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #3182ce;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background-color: #ebf8ff;
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid #bee3f8;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.home-btn:hover {
+    background-color: #3182ce;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+}
+
+/* ── 3. หัวข้อโปรไฟล์ ── */
+.window-page h1 {
+    margin-top: 60px;
+    color: #0d4690; /* สีน้ำเงินเข้มแบบเดียวกับหัวข้อหลัก */
+    text-shadow: 0 0 20px rgba(67, 120, 236, 0.2);
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+/* ── 4. กล่องการ์ดบันทึกโปรไฟล์ ── */
+.profile-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 460px;
+    box-sizing: border-box;
+    border: 2px solid #E6F2FA; /* เปลี่ยนขอบเป็นสีฟ้าอ่อนสะอาดตา */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); /* เงาบางเบาหรูหรา */
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+/* ข้อความ Label หัวช่อง */
+.profile-card label {
+    color: #7A5C49; /* สีน้ำตาลโทนเดียวกับหน้าเซนเซอร์หลัก */
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* ช่องกรอกข้อมูล (Inputs) */
+.profile-card input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 22px;
+    border: 2px solid #E6F2FA;
+    border-radius: 12px;
+    background-color: #fcfdfe;
+    color: #4C2E1A; /* ตัวอักษรสีน้ำตาลเข้ม */
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.profile-card input:focus {
+    outline: none;
+    border-color: #3182ce;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(49, 130, 206, 0.15);
+}
+
+/* สไตล์สำหรับช่องอินพุตเมื่อถูกล็อก (Disabled) */
+input:disabled {
+    background-color: #f7fafc;
+    color: #a0aec0; /* ตัวหนังสือจางลง */
+    border-color: #edf2f7;
+    cursor: not-allowed;
+}
+
+/* ── 5. ปุ่มแอคชันหลัก (แก้ไข/บันทึก) ── */
+.save-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #4C2E1A; /* เริ่มต้นด้วยสีน้ำตาลหลักของโครงการ */
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(76, 46, 26, 0.15);
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(76, 46, 26, 0.25);
+}
+
+#main-btn {
+    transition: all 0.3s ease;
+}

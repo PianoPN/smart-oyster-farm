@@ -1,0 +1,126 @@
+/* ===================================================
+   🌊 STYLE FOR HISTORY PAGE (info.html / style.css)
+   =================================================== */
+
+body.info-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0;
+    overflow-x: hidden; min-height: 100vh;
+}
+
+/* 🧭 แถบบาร์บาร์ด้านบน (คงขนาดเดิม) */
+nav {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    padding: 12px 0; position: sticky; top: 0; z-index: 1000;
+}
+.navbar-inner {
+    width: 92%; max-width: 1400px; margin: 0 auto; display: flex; justify-content: flex-start;
+}
+.home-btn {
+    text-decoration: none; color: #0369a1; font-weight: 600;
+    background: rgba(14, 165, 233, 0.1); padding: 8px 16px; border-radius: 12px;
+}
+
+/* 💎 คอนเทนเนอร์แกนหลัก (ขอบสีฟ้าอ่อนพรีเมียม ขนาดบิ๊กไซส์สมดุลเท่าเดิม) */
+.history-container.glass-card {
+    width: 92%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 45px;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 2.5px solid rgba(56, 189, 248, 0.6); 
+    border-radius: 28px;
+    box-shadow: 0 15px 50px rgba(14, 165, 233, 0.1), 0 0 20px rgba(56, 189, 248, 0.2);
+    box-sizing: border-box;
+}
+
+/* 🏷️ ขนาดฟอนต์หัวข้อตัวใหญ่เต็มตาตามแบบฉบับเก่า */
+.history-title {
+    color: #0369a1;
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+.history-subtitle {
+    color: #0c4a6e;
+    font-size: 1.2rem;
+    margin: 0 0 35px 0;
+}
+
+/* 🎛️ ปุ่มกดสลับกราฟขนาดใหญ่เด่นชัดเท่าของเก่า */
+.control-panel {
+    display: flex; gap: 20px; margin-bottom: 35px; justify-content: center;
+}
+.type-btn {
+    background: rgba(255, 255, 255, 0.85);
+    border: 2px solid rgba(56, 189, 248, 0.4);
+    color: #0369a1;
+    padding: 15px 35px;
+    font-size: 1.2rem;
+    font-weight: 700; border-radius: 16px;
+    cursor: pointer; transition: all 0.25s ease;
+    display: flex; align-items: center; gap: 10px;
+}
+.type-btn:hover {
+    background: rgba(56, 189, 248, 0.15); transform: translateY(-2px); border-color: #0ea5e9;
+}
+.type-btn.active {
+    background: #0ea5e9; color: white; border-color: #0284c7;
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.35);
+}
+
+/* ⬜ 🛠️ นี่คือกรอบสี่เหลี่ยมสีขาวบริสุทธิ์ทึบแสง 100% ที่จะมาครอบทับหลังตัวกราฟ */
+.chart-white-box {
+    background: #ffffff !important; /* บังคับให้เป็นสีขาวทึบ 100% ไม่โปร่งแสง */
+    border: 2px solid rgba(56, 189, 248, 0.3); /* ขอบสีฟ้าซอฟต์รอบตัวกราฟ */
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+}
+
+/* 📈 พื้นที่กระดานวาดกราฟเส้น Chart.js ด้านใน (ขยายใหญ่ขึ้นเพื่อการมองเห็นที่ชัดขึ้น) */
+.chart-wrapper {
+    position: relative;
+    height: 650px;
+    width: 100%;
+}
+
+/* ⬜➡️⬜ ขยายคอนเทนเนอร์หลักให้กว้างขึ้นรองรับกราฟใหญ่ */
+.history-container.glass-card {
+    max-width: 1300px;
+}
+
+/* 🌫️ กรอบสีเทาแสดงสถานะ "ไม่พบข้อมูล" ทับพื้นที่กราฟ เมื่อไม่มีข้อมูลจริงจาก Firebase */
+.no-data-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(148, 163, 184, 0.12);
+    border-radius: 16px;
+    color: #94a3b8;
+    text-align: center;
+    padding: 20px;
+}
+.no-data-overlay i {
+    font-size: 3rem;
+    opacity: 0.6;
+}
+.no-data-overlay p {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+    color: #64748b;
+}
+.no-data-overlay span {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    max-width: 400px;
+}

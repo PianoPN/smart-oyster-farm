@@ -74,13 +74,36 @@ let alertState = {
     turbidity: 'normal'
 };
 
+// เคลียร์ข้อความ "กำลังตรวจสอบ..." ตอนเริ่มต้น เมื่อมีข้อมูลจริงจาก Firebase เข้ามาแล้ว
+function clearNotifyLoadingPlaceholder() {
+    const fullList = document.getElementById('notification-list');
+    if (!fullList) return;
+    const loadingEl = fullList.querySelector('.loading-notify');
+    if (loadingEl) {
+        loadingEl.remove();
+        // ถ้าเชื่อมต่อสำเร็จแต่ยังไม่มีการแจ้งเตือนใดๆ เกิดขึ้นเลย ให้ขึ้นข้อความว่าระบบพร้อมทำงานแล้ว
+        if (fullList.children.length === 0) {
+            const timeString = getThaiDateTime();
+            const readyItem = document.createElement('div');
+            readyItem.className = 'notify-item success';
+            readyItem.innerHTML = `
+                <span class="notify-time">[${timeString}]</span>
+                <span class="notify-msg">✅ เชื่อมต่อเซนเซอร์สำเร็จ กำลังเฝ้าระวังค่าน้ำแบบเรียลไทม์</span>
+            `;
+            fullList.appendChild(readyItem);
+        }
+    }
+}
+
 function createNotifyItem(type, msg) {
     const timeString = getThaiDateTime();
 
     // 1) ส่งเข้าหน้า notify.html แบบเต็ม (ถ้าเปิดหน้านี้อยู่)
     const fullList = document.getElementById('notification-list');
     if (fullList) {
-        const emptyMsg = fullList.querySelector('.empty-msg') || fullList.querySelector('.notify-item[style*="border-color:#ccc"]');
+        const emptyMsg = fullList.querySelector('.empty-msg')
+            || fullList.querySelector('.loading-notify')
+            || fullList.querySelector('.notify-item[style*="border-color:#ccc"]');
         if (emptyMsg) emptyMsg.remove();
 
         const item = document.createElement('div');
@@ -147,13 +170,15 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 // 🌡️ อุณหภูมิ
-database.ref('/sensor/temperature').on('value', (snapshot) => {
+// ⚠️ แก้ไข path ให้ตรงกับที่ Arduino ยิงขึ้นมา (Arduino ใช้ sendToFirebase("/current/temperature", ...))
+database.ref('/current/temperature').on('value', (snapshot) => {
     const temp = snapshot.val();
     const tempValueElement = document.getElementById('card-temp-value');
 
     if (temp !== null && temp !== undefined) {
         liveTemp = temp;
         if (tempValueElement) tempValueElement.innerText = temp.toFixed(1) + " °C";
+        clearNotifyLoadingPlaceholder();
 
         let status = 'normal';
         if (temp > 30) {
@@ -178,6 +203,8 @@ database.ref('/sensor/temperature').on('value', (snapshot) => {
         if (predictResult && predictResult.isDanger) {
             createNotifyItem('warning', predictResult.msg);
         }
+
+        calculateOverallWaterQuality(); // อัปเดตกล่องสรุปคุณภาพน้ำทันทีที่มีค่าใหม่เข้ามา
     } else {
         if (tempValueElement) tempValueElement.innerText = "--";
         updateStatusUI('card-temp-status', 'ไม่มีข้อมูล', '');
@@ -185,6 +212,8 @@ database.ref('/sensor/temperature').on('value', (snapshot) => {
 });
 
 // 🧪 ความขุ่น
+// ⚠️ หมายเหตุ: ตอนนี้โค้ด Arduino ยังไม่มีเซ็นเซอร์วัดความขุ่น (turbidity) จึงยังไม่มีข้อมูลจริงส่งมาที่ path นี้
+// การ์ดนี้จะขึ้น "ไม่มีข้อมูล" ไปก่อน จนกว่าจะเพิ่มเซ็นเซอร์และเพิ่มโค้ดส่งค่าใน .ino
 database.ref('/sensor/turbidity').on('value', (snapshot) => {
     const turbidity = snapshot.val();
     const turbidityValueElement = document.getElementById('turbidity-value');
@@ -192,6 +221,7 @@ database.ref('/sensor/turbidity').on('value', (snapshot) => {
     if (turbidity !== null && turbidity !== undefined) {
         liveTurbidity = turbidity;
         if (turbidityValueElement) turbidityValueElement.innerText = turbidity.toFixed(1) + " NTU";
+        clearNotifyLoadingPlaceholder();
 
         let status = 'normal';
         if (turbidity > 50) {
@@ -212,13 +242,15 @@ database.ref('/sensor/turbidity').on('value', (snapshot) => {
 });
 
 // 🧪 pH
-database.ref('/sensor/ph').on('value', (snapshot) => {
+// ⚠️ แก้ไข path ให้ตรงกับที่ Arduino ยิงขึ้นมา (Arduino ใช้ sendToFirebase("/current/ph", ...))
+database.ref('/current/ph').on('value', (snapshot) => {
     const ph = snapshot.val();
     const phValueElement = document.getElementById('card-ph-value');
 
     if (ph !== null && ph !== undefined) {
         livePh = ph;
         if (phValueElement) phValueElement.innerText = ph.toFixed(2);
+        clearNotifyLoadingPlaceholder();
 
         let status = 'normal';
         if (ph > 8.0) {
@@ -237,6 +269,8 @@ database.ref('/sensor/ph').on('value', (snapshot) => {
                 : `🔴 อันตราย: ค่า pH ต่ำเกินไป (${ph.toFixed(2)}) อาจส่งผลต่อการสร้างเปลือกหอย!`,
             `✅ กลับมาปกติแล้ว: ค่า pH อยู่ที่ ${ph.toFixed(2)}`
         );
+
+        calculateOverallWaterQuality();
     } else {
         if (phValueElement) phValueElement.innerText = "--";
         updateStatusUI('card-ph-status', 'ไม่มีข้อมูล', '');
@@ -244,13 +278,15 @@ database.ref('/sensor/ph').on('value', (snapshot) => {
 });
 
 // 🌊 ความเค็ม
-database.ref('/sensor/salinity').on('value', (snapshot) => {
+// ⚠️ แก้ไข path ให้ตรงกับที่ Arduino ยิงขึ้นมา (Arduino ใช้ sendToFirebase("/current/salinity", ...))
+database.ref('/current/salinity').on('value', (snapshot) => {
     const salinity = snapshot.val();
     const salinityValueElement = document.getElementById('salinity-title');
 
     if (salinity !== null && salinity !== undefined) {
         liveSalinity = salinity;
         if (salinityValueElement) salinityValueElement.innerText = salinity.toFixed(1) + " ppt";
+        clearNotifyLoadingPlaceholder();
 
         let status = 'normal';
         if (salinity < 10.0) {
@@ -269,6 +305,8 @@ database.ref('/sensor/salinity').on('value', (snapshot) => {
                 : `🔸 แจ้งเตือน: ค่าความเค็มน้ำ (${salinity.toFixed(1)} ppt) สูงเกินเกณฑ์`,
             `✅ กลับมาปกติแล้ว: ค่าความเค็มอยู่ที่ ${salinity.toFixed(1)} ppt`
         );
+
+        calculateOverallWaterQuality();
     } else {
         if (salinityValueElement) salinityValueElement.innerText = "--";
         updateStatusUI('status-soil', 'ไม่มีข้อมูล', '');
@@ -345,49 +383,8 @@ window.onload = function() {
     getWeatherData();
 };
 // ==========================================================================
-// 💧 1. ระบบประเมินวิเคราะห์คุณภาพน้ำโดยรวม (เพิ่มกล่องจัตุรัสฝั่งขวา)
+// 💧 1. (ย้ายไปรวมเป็นฟังก์ชันเดียวด้านล่าง เพื่อไม่ให้มี calculateOverallWaterQuality ซ้ำกัน 2 อัน)
 // ==========================================================================
-function calculateOverallWaterQuality() {
-    const iconEl = document.getElementById('water-status-icon');
-    const textEl = document.getElementById('water-status-text');
-    const adviceEl = document.getElementById('water-status-advice');
-    
-    if (!iconEl || !textEl || !adviceEl) return; // ทำงานเฉพาะหน้าที่มีกล่องนี้เท่านั้น
-
-    let totalDangers = 0;
-    let totalWarnings = 0;
-    let advices = [];
-
-    // เช็กค่าจากตัวแปร Global (liveTemp, livePh, liveSalinity) ที่มีอยู่ในระบบเดิมของคุณ
-    // เช็กอุณหภูมิ
-    if (liveTemp > 30) { totalDangers++; advices.push("อุณหภูมิน้ำร้อนเกินไป ควรเพิ่มร่มเงาหรือระบายน้ำ"); }
-    else if (liveTemp < 24) { totalWarnings++; advices.push("อุณหภูมิน้ำเย็นเกินไป เฝ้าระวังพฤติกรรมหอย"); }
-
-    // เช็ก pH
-    if (livePh > 8.0 || livePh < 6.5) { totalDangers++; advices.push("ค่า pH วิกฤต! ส่งผลต่อการสร้างเปลือกหอย ถ่ายน้ำด่วน"); }
-
-    // เช็กความเค็ม
-    if (liveSalinity < 10.0) { totalDangers++; advices.push("น้ำจืดเกินไป (วิกฤตความเค็มต่ำ) เปิดน้ำทะเลหนุนเข้าระบบด่วน"); }
-    else if (liveSalinity > 35.0) { totalWarnings++; advices.push("น้ำเค็มจัดเกินไป ควรเติมน้ำสะอาดเจือจางทีละน้อย"); }
-
-    // ประมวลผลลัพธ์แสดงไอคอนยิ้ม/เฝ้าระวัง ตามบรีฟ
-    if (totalDangers > 0) {
-        iconEl.innerText = "😡";
-        textEl.innerText = "ไม่เหมาะสม";
-        textEl.style.color = "#ef4444";
-        adviceEl.innerText = advices.join(" | ");
-    } else if (totalWarnings > 0) {
-        iconEl.innerText = "⚠️";
-        textEl.innerText = "เฝ้าระวัง";
-        textEl.style.color = "#f59e0b";
-        adviceEl.innerText = advices.join(" | ");
-    } else {
-        iconEl.innerText = "🥰";
-        textEl.innerText = "เหมาะสม";
-        textEl.style.color = "#22c55e";
-        adviceEl.innerText = "ค่าน้ำทุกอย่างอยู่ในเกณฑ์สมบูรณ์แบบ หอยนางรมเจริญเติบโตรวดเร็วและกินอาหารได้ดีมากครับ";
-    }
-}
 
 // ==========================================================================
 // 🫧 2. ระบบสร้างฟองอากาศพาสเทลเบาๆ ลอยอยู่พื้นหลัง (มินิมอล)
@@ -527,6 +524,10 @@ function calculateOverallWaterQuality() {
                                     <span class="mini-notify-msg">✅ ฟาร์มปลอดภัย: ค่าน้ำทั้งหมดอยู่ในเกณฑ์ปกติ ไม่มีรายงานแจ้งเตือน</span>
                                  </div>`;
     }
+
+    // 🐙 อัปเดตอารมณ์ AI Pet ตามค่าความเค็มจริง (น้ำจืดจัดเกินไป = เครียด)
+    const petMood = (currentSalinity > 0 && currentSalinity < 10.0) ? 'scared' : 'happy';
+    updateDashboardAiPetDisplay(petMood);
 }
 // ==========================================
 // ── ระบบอัปเดต AI Pet Real-time บนหน้าแดชบอร์ด ──

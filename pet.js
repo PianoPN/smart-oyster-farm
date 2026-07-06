@@ -1,4 +1,4 @@
-// ตั้งค่า Firebase ดึงข้อมูลความจริงจากฟาร์มของคุณ
+/ ตั้งค่า Firebase ดึงข้อมูลความจริงจากฟาร์มของคุณ
 const firebaseConfig = {
     apiKey: "AIzaSyAlTdug7W4lsdzmSKg3VxrhZwCcikrXV-8",
     databaseURL: "https://smart-oyster-farm-default-rtdb.asia-southeast1.firebasedatabase.app/",
@@ -12,6 +12,11 @@ const database = firebase.database();
 // ตัวแปรเก็บสถานะการทำงานปัจจุบัน
 let isRealtimeMode = true;
 let liveSalinityVal = 25.0; // ค่าเริ่มต้นเผื่อโหลดช้า
+
+// 🔒 ฟิกอารมณ์โหมด Real-time ให้เป็น "happy" ตลอด (ไม่สนใจค่าจริงจากเซนเซอร์)
+// ถ้าอยากกลับไปให้คำนวณจากค่าจริงเหมือนเดิม แค่เปลี่ยนเป็น false
+const LOCK_REALTIME_MOOD = true;
+const LOCKED_MOOD_KEY = 'happy';
 
 // คลังข้อมูลอารมณ์ทั้งหมดของน้องหอย (ใช้ทั้งโหมดจำลอง และ Real-time)
 const moodData = {
@@ -108,7 +113,10 @@ database.ref('/sensor/salinity').on('value', (snapshot) => {
     const liveBadge = document.getElementById('live-badge');
     const liveNarrative = document.getElementById('live-narrative');
 
-    if (liveSalinityVal < 10.0) {
+    // 🔒 ถ้าล็อกอารมณ์ไว้ ให้ขึ้น "ปกติ/ร่าเริงดี" เสมอ ไม่ว่าค่าจริงจะเป็นเท่าไหร่
+    const isStressed = LOCK_REALTIME_MOOD ? false : (liveSalinityVal < 10.0);
+
+    if (isStressed) {
         if (liveBadge) { liveBadge.innerText = "วิกฤต: เครียดน้ำจืด"; liveBadge.className = "pet-badge badge-scared"; }
         if (liveNarrative) liveNarrative.innerText = `ตรวจพบความเค็มต่ำวิกฤต (${liveSalinityVal.toFixed(1)} ppt) น้องหอยในฟาร์มกำลังเครียดหนัก`;
     } else {
@@ -117,7 +125,8 @@ database.ref('/sensor/salinity').on('value', (snapshot) => {
     }
 
     if (isRealtimeMode) {
-        updateRightDisplay(liveSalinityVal < 10.0 ? 'scared' : 'happy', `โหมด: Real-time ตรวจสอบฟาร์มจริง (${liveSalinityVal.toFixed(1)} ppt)`);
+        const moodKey = LOCK_REALTIME_MOOD ? LOCKED_MOOD_KEY : (isStressed ? 'scared' : 'happy');
+        updateRightDisplay(moodKey, `โหมด: Real-time ตรวจสอบฟาร์มจริง (${liveSalinityVal.toFixed(1)} ppt)`);
     }
 });
 
@@ -140,7 +149,10 @@ function switchToRealtime() {
     document.getElementById('btn-realtime').classList.add('active-realtime');
     const allCards = document.querySelectorAll('.mood-list-container .status-menu-card');
     allCards.forEach(card => card.style.borderColor = '#E6F2FA');
-    updateRightDisplay(liveSalinityVal < 10.0 ? 'scared' : 'happy', `โหมด: Real-time ตรวจสอบฟาร์มจริง (${liveSalinityVal.toFixed(1)} ppt)`);
+
+    // 🔒 ถ้าล็อกอารมณ์ไว้ ใช้ LOCKED_MOOD_KEY เสมอ ไม่คำนวณจากค่าจริง
+    const moodKey = LOCK_REALTIME_MOOD ? LOCKED_MOOD_KEY : (liveSalinityVal < 10.0 ? 'scared' : 'happy');
+    updateRightDisplay(moodKey, `โหมด: Real-time ตรวจสอบฟาร์มจริง (${liveSalinityVal.toFixed(1)} ppt)`);
 }
 
 // ── ฟังก์ชันอัปเดตหน้าตา อารมณ์ สาเหตุ และวิธีแก้ไข ฝั่งขวา ──

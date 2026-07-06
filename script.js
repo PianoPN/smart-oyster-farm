@@ -316,32 +316,28 @@ database.ref('/current/salinity').on('value', (snapshot) => {
 /* ส่วนพยากรณ์อากาศจาก OpenWeather API */
 const API_KEY = "f0404e9cd40f393c38ea9842d0d799f2"; 
 
-function getWeatherData() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=th&appid=${API_KEY}`;
+// 📍 ฟิกพิกัดไว้ที่ อ.เมือง จ.สงขลา (ไม่ใช้ตำแหน่งจริงของผู้ใช้แล้ว)
+const FIXED_LOCATION = {
+    name: "อ.เมือง จ.สงขลา",
+    lat: 7.1756,
+    lon: 100.6142
+};
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    updateWeatherUI(data);
-                })
-                .catch(err => {
-                    console.error("Error fetching weather:", err);
-                    const cityEl = document.getElementById('weather-city');
-                    if (cityEl) cityEl.innerText = "ไม่สามารถดึงข้อมูลอากาศได้";
-                });
-        }, (error) => {
-            console.error("Geolocation error:", error);
+function getWeatherData() {
+    const lat = FIXED_LOCATION.lat;
+    const lon = FIXED_LOCATION.lon;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=th&appid=${API_KEY}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            updateWeatherUI(data);
+        })
+        .catch(err => {
+            console.error("Error fetching weather:", err);
             const cityEl = document.getElementById('weather-city');
-            if (cityEl) cityEl.innerText = "ผู้ใช้ปฏิเสธการเข้าถึงพิกัดตำแหน่ง";
+            if (cityEl) cityEl.innerText = "ไม่สามารถดึงข้อมูลอากาศได้";
         });
-    } else {
-        const cityEl = document.getElementById('weather-city');
-        if (cityEl) cityEl.innerText = "เบราว์เซอร์ไม่รองรับการระบุตำแหน่ง";
-    }
 }
 
 function updateWeatherUI(data) {
@@ -351,7 +347,7 @@ function updateWeatherUI(data) {
     }
 
     const cityElement = document.getElementById('weather-city');
-    if (cityElement) { cityElement.innerHTML = `📍 ${data.name}`; }
+    if (cityElement) { cityElement.innerHTML = `📍 ${FIXED_LOCATION.name}`; }
     
     const tempElement = document.getElementById('weather-temp');
     if (tempElement) { tempElement.innerText = `${Math.round(data.main.temp)}°C`; }
